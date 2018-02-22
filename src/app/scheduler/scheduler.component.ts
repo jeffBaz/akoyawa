@@ -34,6 +34,11 @@ export class SchedulerComponent  {
     console.log('Event clicked', event);
   }
 
+   createEvent( event : Date ): void {
+    this.view = 'day';
+    this.viewDate = event.day.date;
+    console.log('clickedDate :', this.viewDate);
+  }
 }
 
 export const colors: any = {
