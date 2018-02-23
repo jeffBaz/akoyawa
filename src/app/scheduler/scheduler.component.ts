@@ -9,7 +9,7 @@ import { CalendarEvent } from 'angular-calendar';
   styleUrls: ['./scheduler.component.css']
 })
 export class SchedulerComponent  {
-  view:  'week';
+  view = 'week';
 
   viewDate: Date = new Date();
   clickedDate: Date;
@@ -34,10 +34,10 @@ export class SchedulerComponent  {
     console.log('Event clicked', event);
   }
 
-   createEvent( event : Date ): void {
-    this.view = 'day';
-    this.viewDate = event.day.date;
+   createEvent( event : qny ): void {
     console.log('clickedDate :', this.viewDate);
+    this.view = 'day';
+    this.viewDate = event;
   }
 }
 
