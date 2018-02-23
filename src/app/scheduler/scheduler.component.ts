@@ -34,7 +34,7 @@ export class SchedulerComponent  {
     console.log('Event clicked', event);
   }
 
-   createEvent( event : qny ): void {
+   createEvent( event : any ): void {
     console.log('clickedDate :', this.viewDate);
     this.view = 'day';
     this.viewDate = event;
