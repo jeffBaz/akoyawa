@@ -37,7 +37,7 @@ export class SchedulerComponent  {
    createEvent( event : any ): void {
     console.log('clickedDate :', this.viewDate);
     this.view = 'day';
-    this.viewDate = event;
+    this.viewDate = event.day.date;
   }
 }
 
