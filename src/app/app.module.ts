@@ -5,7 +5,7 @@ import { CalendarModule } from 'angular-calendar';
 import { AppComponent } from './app.component';
 import { SchedulerComponent } from './scheduler/scheduler.component';
 import { CalendarheaderComponent } from './scheduler/calendarheader/calendarheader.component';
-
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 
 @NgModule({
@@ -16,10 +16,11 @@ import { CalendarheaderComponent } from './scheduler/calendarheader/calendarhead
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     CalendarModule.forRoot() 
   ],
-  providers: [],
+  providers: [HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

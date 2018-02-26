@@ -9,6 +9,8 @@
 	 *ngSwitchCase="'day'"
 	    [viewDate]="viewDate"
 	    [events]="events"
+	     [dayStartHour]="8"
+ 		 [dayEndHour]="18"
 	    (hourSegmentClicked) = "createEvent($event)"
 	    (eventClicked)="eventClicked($event)">
 	</mwl-calendar-day-view>
