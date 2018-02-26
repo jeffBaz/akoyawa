@@ -81,11 +81,12 @@ export class SchedulerComponent  {
   }
    createEvent( event : any ): void {
     if( this.view == 'day'){
-      let e = {};
-      e.title = 'Click me to validate';
-      e.color = this.colors.yellow;
-      e.start =  event.date;
-      e.end = addHours(event.date, 1);
+      let e: CalendarEvent<any> = {
+      title : 'Click me to validate',
+      color : this.colors.yellow,
+      start :  event.date,
+      end : addHours(event.date, 1)
+      }
       this.validateEvent(e);
       this.events.push(e);
       this.viewDate = event.date;
