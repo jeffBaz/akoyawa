@@ -1,7 +1,9 @@
+import { DialogComponent } from '../dialog/dialog.component';
 import { Component, OnInit, ChangeDetectionStrategy, Input  } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { CalendarEvent } from 'angular-calendar';
 import { map } from 'rxjs/operators/map';
+import { AngularFireDatabase } from 'angularfire2/database'; 
 import {
   addHours,
   subMonths,
@@ -15,7 +17,8 @@ import {
   startOfWeek,
   endOfWeek,
   startOfDay,
-  endOfDay
+  endOfDay,
+  format
 } from 'date-fns';
 import { Subject, Observable } from 'rxjs';
 
@@ -30,7 +33,7 @@ export class SchedulerComponent  {
   view = 'week';
   viewDate: Date = new Date();
   clickedDate: Date;
-  events$: Observable<Array<CalendarEvent>>;
+  eventsFromFb: Observable<Array<CalendarEvent>>;
   colors: any = {
     red: {
       primary: '#ad2121',
@@ -61,35 +64,38 @@ export class SchedulerComponent  {
       start: addDays(new Date(), 1)
     }*/
   ];
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private db: AngularFireDatabase) {}
   fetchEvents(){
-    let params = null;
-    this.events$ = this.http
-      .get('https://api.themoviedb.org/3/discover/movie', { params })
-      .pipe(
-        map(({ results }: { results: CalendarEvent[] }) => {
-          return results;
-        })
-      );
+    
   }
 
   eventClicked({ event }: { event: CalendarEvent }): void {
     console.log('Event clicked', event);
   }
-  validateEvent( event : any ){
-  
+  validateEvent( eventDate : CalendarEvent ){
+  return this.db.list('/events', ref => ref.startAt(eventDate.start.getTime()).endAt(eventDate.end.getTime())).valueChanges();
   }
    createEvent( event : any ): void {
     if( this.view == 'day'){
       let e: CalendarEvent<any> = {
-      title : 'Click me to validate',
+      title :  "Event " + Math.random,
       color : this.colors.yellow,
       start :  event.date,
       end : addHours(event.date, 1)
       }
-      this.validateEvent(e);
-      this.events.push(e);
-      this.viewDate = event.date;
+      this.eventsFromFb = this.validateEvent(e);
+            // subscribe to changes
+      this.eventsFromFb.subscribe((queriedItems)=> {
+              if(queriedItems.length==0){
+                this.db.list('/events').push({e});
+                this.events.push(e);
+                this.viewDate = event.date;
+                
+              }else{
+                alert("Ce créneau est pris veuillez en sélectionner un autre");
+              }
+       });
+     
     }else{
       console.log('clickedDate :', this.viewDate);
       this.view = 'day';
