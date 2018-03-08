@@ -13,6 +13,10 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from './../environments/environment';
+import { EventformComponent } from './eventform/eventform.component';
+import { ErrorComponent } from './error/error.component';
+import { HomeComponent } from './home/home.component';
+import { RouterModule, Routes } from '@angular/router';
 
 export const firebaseConfig = {
       apiKey: 'AIzaSyB8efztwXl-AKhdQKqfdpbqSwmNtrpnulo',
@@ -22,12 +26,25 @@ export const firebaseConfig = {
       storageBucket: '',
       messagingSenderId: '380558604887'
 };
+const appRoutes: Routes = [
+  { path: 'calendar', component: SchedulerComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'rdv',      component: EventformComponent },
+  { path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
+  },
+  { path: '**', component: ErrorComponent }
+];
 @NgModule({
   declarations: [
     AppComponent,
     SchedulerComponent,
     CalendarheaderComponent,
-    DialogComponent
+    DialogComponent,
+    EventformComponent,
+    ErrorComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +54,12 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    CalendarModule.forRoot() 
+    CalendarModule.forRoot() , 
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    )
+    // other imports here 
   ],
   providers: [HttpClientModule,{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}],
   bootstrap: [AppComponent]
