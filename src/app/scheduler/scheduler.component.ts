@@ -106,9 +106,9 @@ export class SchedulerComponent implements OnInit {
   ];
   constructor(private http: HttpClient, private db: AngularFireDatabase, private eventsService: EventsService, private router: Router ) {}
   fetchEvents(){
-   this.db.list('/events').valueChanges().subscribe((queriedItems: CalendarEvent[])=> {
+   this.db.list('/events').valueChanges().subscribe((queriedItems: ICalendarEvent[])=> {
         this.events = [];
-        queriedItems.forEach(function (value : CalendarEvent) {
+        queriedItems.forEach(function (value : ICalendarEvent) {
           let stDate = new Date();
           stDate.setTime(value.startTime);
           let endDate = new Date();
@@ -123,7 +123,7 @@ export class SchedulerComponent implements OnInit {
       });
   }
 
-  eventClicked({ event }: { event: CalendarEvent }): void {
+  eventClicked({ event }: { event: ICalendarEvent }): void {
     console.log('Event clicked', event);
   }
   validateEvent( eventDate : ICalendarEvent ){
