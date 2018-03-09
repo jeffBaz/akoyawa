@@ -1,12 +1,22 @@
 import { DialogComponent } from '../dialog/dialog.component';
 import { EventsService } from '../services/events.service';
-import { Component, OnInit, ChangeDetectionStrategy, Input  } from '@angular/core';
+import { ICalendarEvent } from '../utils/mycalendarevent';
+import { Component, OnInit, ChangeDetectionStrategy, Input,  ViewChild,
+  TemplateRef  } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { CalendarEvent } from 'angular-calendar';
+import { CalendarEvent,CalendarEventAction,
+  CalendarEventTimesChangedEvent } from 'angular-calendar';
 import { map } from 'rxjs/operators/map';
 import { AngularFireDatabase } from 'angularfire2/database'; 
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import * as _ from 'lodash';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 import {
   addHours,
   subMonths,
@@ -23,7 +33,8 @@ import {
   endOfDay,
   format
 } from 'date-fns';
-import { Subject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
 
 
 @Component({
@@ -31,10 +42,25 @@ import { Subject, Observable } from 'rxjs';
   templateUrl: './scheduler.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [ EventsService ],
-  styleUrls: ['./scheduler.component.css']
+  styleUrls: ['./scheduler.component.css'],
+ animations: [
+  trigger('toggleState', [
+    state('show', style({
+      opacity: '1'
+    })),
+    state('hide',   style({
+      opacity: '0'
+    })),
+    
+    transition('show <=> hide', animate('500ms ease-in')),
+    //transition('hide => show', animate('1000ms ease-out'))
+  ])
+ ]
 })
-export class SchedulerComponent  {
-  view = 'week';
+export class SchedulerComponent implements OnInit {
+  view = 'month';
+  refresh: Subject<any> = new Subject<any>();
+  @Input() toggleCalendar: string;
   viewDate: Date = new Date();
   clickedDate: Date;
   eventsFromFb: Observable<Array<any>>;
@@ -55,11 +81,18 @@ export class SchedulerComponent  {
   
  
  ngOnInit(): void {
-    this.fetchEvents();
+   this.toggleCalendar = 'show';
+   this.fetchEvents();
+   //this.refresh.subscribe(value => {console.log(value)});
+   /* setTimeout(()=>{    //<<<---    using ()=> syntax
+        this.toggleCalendar = 'show';
+     },3000);*/
+    
   }
-  filteredEvents: CalendarEvent[] = []; 
+  filteredEvents: ICalendarEvent[] = []; 
   filters = {};
-  events: CalendarEvent[] = [ /*
+  allEvents: Observable<Array<ICalendarEvent<any>>>;
+  events: ICalendarEvent[] = [ 
     {
       title: 'Click me',
       color: this.colors.yellow,
@@ -69,11 +102,12 @@ export class SchedulerComponent  {
       title: 'Or click me',
       color: this.colors.blue,
       start: addDays(new Date(), 1)
-    }*/
+    }
   ];
   constructor(private http: HttpClient, private db: AngularFireDatabase, private eventsService: EventsService, private router: Router ) {}
   fetchEvents(){
    this.db.list('/events').valueChanges().subscribe((queriedItems: CalendarEvent[])=> {
+        this.events = [];
         queriedItems.forEach(function (value : CalendarEvent) {
           let stDate = new Date();
           stDate.setTime(value.startTime);
@@ -83,14 +117,16 @@ export class SchedulerComponent  {
           value.start = stDate;
          
         });
-        this.events = queriedItems;
+         this.events = [...queriedItems];
+         this.refresh.next();
+       
       });
   }
 
   eventClicked({ event }: { event: CalendarEvent }): void {
     console.log('Event clicked', event);
   }
-  validateEvent( eventDate : CalendarEvent ){
+  validateEvent( eventDate : ICalendarEvent ){
   return this.db.list('/events').valueChanges();
   }
    applyFilters( ){
@@ -104,13 +140,13 @@ export class SchedulerComponent  {
     this.applyFilters();
   }
      
-  isAvailable(event: CalendarEvent, valueTime: number) {
+  isAvailable(event: ICalendarEvent, valueTime: number) {
    return event.startTime;
   }
   
    createEvent( event : any ): void {
     if( this.view == 'day'){
-      let e: CalendarEvent<any> = {
+      let e: ICalendarEvent<any> = {
       title :  "Event " + Math.random(),
       color : this.colors.yellow,
       start :  event.date,

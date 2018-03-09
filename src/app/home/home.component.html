@@ -1,4 +1,4 @@
 <div id="preloader">
-  <div id="loader"></div>
-  <div id="logo"><img [src]="logoPath"> </div>
-</div>
+  <div [@toggleState]="toggleLoader"  id="loader"></div>
+  <img [@toggleState]="toggleLogo" (@toggleState.done)="loaderHidden($event)" id="logo" [src]="logoPath">
+ </div>

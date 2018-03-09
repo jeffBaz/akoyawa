@@ -1,34 +1,35 @@
-
-<mwl-demo-utils-calendar-header
-  [(view)]="view"
-  [(viewDate)]="viewDate">
-</mwl-demo-utils-calendar-header>
-
-<div [ngSwitch]="view">
-	<mwl-calendar-day-view
-	 *ngSwitchCase="'day'"
-	    [viewDate]="viewDate"
-	    [events]="events"
-	     [dayStartHour]="8"
- 		 [dayEndHour]="18"
-	    (hourSegmentClicked) = "createEvent($event)"
-	    (eventClicked)="eventClicked($event)">
-	</mwl-calendar-day-view>
+<div id="calendar-content" [@toggleState]="toggleCalendar">
+	<mwl-demo-utils-calendar-header
+	  [(view)]="view"
+	  [(viewDate)]="viewDate">
+	</mwl-demo-utils-calendar-header>
 	
-	<mwl-calendar-week-view
-	 *ngSwitchCase="'week'"
-	    [viewDate]="viewDate"
-	    [events]="events"
-	    (dayClicked)="clickedDate = createEvent($event)"
-	    (eventClicked)="eventClicked($event)">
-	</mwl-calendar-week-view>
-	
-	<mwl-calendar-month-view
-	 *ngSwitchCase="'month'"
-	  [viewDate]="viewDate"
-	  [events]="events"
-	  [activeDayIsOpen]="true"
-	  (dayClicked)="clickedDate = createEvent($event)"
-	  (eventClicked)="eventClicked($event)">
-	</mwl-calendar-month-view>
+	<div [ngSwitch]="view">
+		<mwl-calendar-day-view
+		 *ngSwitchCase="'day'"
+		    [viewDate]="viewDate"
+		    [events]="events"
+		     [dayStartHour]="8"
+	 		 [dayEndHour]="18"
+		    (hourSegmentClicked) = "createEvent($event)"
+		    (eventClicked)="eventClicked($event)">
+		</mwl-calendar-day-view>
+		
+		<!-- mwl-calendar-week-view
+		 *ngSwitchCase="'week'"
+		    [viewDate]="viewDate"
+		    [events]="events"
+		    (dayClicked)="clickedDate = createEvent($event)"
+		    (eventClicked)="eventClicked($event)">
+		</mwl-calendar-week-view-->
+		
+		<mwl-calendar-month-view
+		 *ngSwitchCase="'month'"
+		  [viewDate]="viewDate"
+		  [events]="events"
+		  [activeDayIsOpen]="true"
+		  (dayClicked)="clickedDate = createEvent($event)"
+		  (eventClicked)="eventClicked($event)">
+		</mwl-calendar-month-view>
+	</div>
 </div>
