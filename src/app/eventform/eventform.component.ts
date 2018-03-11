@@ -7,7 +7,6 @@ import { AngularFireDatabase } from 'angularfire2/database';
 @Component({
   selector: 'app-eventform',
   templateUrl: './eventform.component.html',
-  providers: [ EventsService ],
   styleUrls: ['./eventform.component.css']
 })
 export class EventformComponent implements OnInit {

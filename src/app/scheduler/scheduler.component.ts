@@ -2,7 +2,7 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { EventsService } from '../services/events.service';
 import { ICalendarEvent } from '../utils/mycalendarevent';
 import { Component, OnInit, ChangeDetectionStrategy, Input,  ViewChild,
-  TemplateRef  } from '@angular/core';
+  TemplateRef, ElementRef  } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { CalendarEvent,CalendarEventAction,
   CalendarEventTimesChangedEvent } from 'angular-calendar';
@@ -41,7 +41,6 @@ import { Subject } from 'rxjs/Subject';
   selector: 'app-scheduler',
   templateUrl: './scheduler.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [ EventsService ],
   styleUrls: ['./scheduler.component.css'],
  animations: [
   trigger('toggleState', [
@@ -81,8 +80,13 @@ export class SchedulerComponent implements OnInit {
   
  
  ngOnInit(): void {
+   if(this.eventsService.loadsIndex==0){
+  //   this.router.navigate(['/']);
+   }
+ 
    this.toggleCalendar = 'show';
-   this.fetchEvents();
+   this.events = this.eventsService.events;
+  // this.fetchEvents();
    //this.refresh.subscribe(value => {console.log(value)});
    /* setTimeout(()=>{    //<<<---    using ()=> syntax
         this.toggleCalendar = 'show';
@@ -92,21 +96,12 @@ export class SchedulerComponent implements OnInit {
   filteredEvents: ICalendarEvent[] = []; 
   filters = {};
   allEvents: Observable<Array<ICalendarEvent<any>>>;
-  events: ICalendarEvent[] = [ 
-    {
-      title: 'Click me',
-      color: this.colors.yellow,
-      start: new Date()
-    },
-    {
-      title: 'Or click me',
-      color: this.colors.blue,
-      start: addDays(new Date(), 1)
-    }
-  ];
+  events: ICalendarEvent[] = [];
+  
   constructor(private http: HttpClient, private db: AngularFireDatabase, private eventsService: EventsService, private router: Router ) {}
+  
   fetchEvents(){
-   this.db.list('/events').valueChanges().subscribe((queriedItems: ICalendarEvent[])=> {
+  this.eventsService.events$.subscribe((queriedItems: ICalendarEvent[])=> {
         this.events = [];
         queriedItems.forEach(function (value : ICalendarEvent) {
           let stDate = new Date();

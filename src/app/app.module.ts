@@ -16,6 +16,7 @@ import { environment } from './../environments/environment';
 import { EventformComponent } from './eventform/eventform.component';
 import { ErrorComponent } from './error/error.component';
 import { HomeComponent } from './home/home.component';
+import { EventsService } from './services/events.service';
 import { RouterModule, Routes } from '@angular/router';
 
 export const firebaseConfig = {
@@ -28,13 +29,13 @@ export const firebaseConfig = {
 };
 const appRoutes: Routes = [
   { path: 'calendar', component: SchedulerComponent },
-  { path: 'home', component: HomeComponent },
+  { path: '*', component: HomeComponent },
   { path: 'rdv',      component: EventformComponent },
   { path: '',
     redirectTo: '/home',
     pathMatch: 'full'
   },
-  { path: '**', component: ErrorComponent }
+  { path: '**', component: HomeComponent }
 ];
 @NgModule({
   declarations: [
@@ -61,7 +62,7 @@ const appRoutes: Routes = [
     )
     // other imports here 
   ],
-  providers: [HttpClientModule,{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}],
+  providers: [HttpClientModule,{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}, EventsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
