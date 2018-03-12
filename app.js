@@ -10,4 +10,7 @@ express()
   .set('port', PORT)
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('dist/index'))
+  .get('*', function(req, res) {
+	  res.sendfile('./server/views/index.html')
+	})
   .listen(PORT, '0.0.0.0', () => console.log(`Listening on ${ path } ${ PORT }`))
