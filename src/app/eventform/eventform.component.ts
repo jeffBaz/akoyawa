@@ -33,6 +33,10 @@ import { Router } from '@angular/router';
 })
 export class EventformComponent implements OnInit {
   event : ICalendarEvent;
+  name : string;
+  firstname : string;
+  telephone : string;
+  code : string = "idClient"; 
   transactionStatus: string;
   toggleForm: String;
   toggleSuccess: String;
@@ -53,6 +57,10 @@ export class EventformComponent implements OnInit {
 
    onSubmit() {
      let database = this.db;
+     this.event.nom = this.name;
+     this.event.prenom = this.firstname;
+     this.event.tel = this.telephone;
+     this.event.codeValidation = this.code;
      let eventToInsert = this.event;
      let _this = this;
      var handler = (<any>window).StripeCheckout.configure({

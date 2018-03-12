@@ -2,6 +2,7 @@
 <div id="calendar-content" [@toggleState]="toggleCalendar">
 	<mwl-demo-utils-calendar-header
 	  [(view)]="view"
+	   [locale]="locale"
 	  [(viewDate)]="viewDate">
 	</mwl-demo-utils-calendar-header>
 	
@@ -10,6 +11,7 @@
 		 *ngSwitchCase="'day'"
 		    [viewDate]="viewDate"
 		    [events]="events"
+		     [locale]="locale"
 		     [dayStartHour]="8"
 	 		 [dayEndHour]="18"
 		    (hourSegmentClicked) = "createEvent($event)"
@@ -28,6 +30,7 @@
 		 *ngSwitchCase="'month'"
 		  [viewDate]="viewDate"
 		  [events]="events"
+		   [locale]="locale"
 		  [activeDayIsOpen]="true"
 		  (dayClicked)="clickedDate = createEvent($event)"
 		  (eventClicked)="eventClicked($event)">

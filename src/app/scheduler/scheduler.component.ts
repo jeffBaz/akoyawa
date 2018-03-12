@@ -4,7 +4,8 @@ import { ICalendarEvent } from '../utils/mycalendarevent';
 import { Component, OnInit, ChangeDetectionStrategy, Input,  ViewChild,
   TemplateRef, ElementRef  } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { CalendarEvent,CalendarEventAction,
+import { CalendarEvent,CalendarEventAction, CalendarDateFormatter,
+  DAYS_OF_WEEK,
   CalendarEventTimesChangedEvent } from 'angular-calendar';
 import { map } from 'rxjs/operators/map';
 import { AngularFireDatabase } from 'angularfire2/database'; 
@@ -17,6 +18,7 @@ import {
   animate,
   transition
 } from '@angular/animations';
+import { CustomDateFormatter } from '../utils/customdateformatter';
 import {
   addHours,
   subMonths,
@@ -61,7 +63,9 @@ export class SchedulerComponent implements OnInit {
   refresh: Subject<any> = new Subject<any>();
   @Input() toggleCalendar: string;
   viewDate: Date = new Date();
+  smallscreen: boolean = false;
   clickedDate: Date;
+  locale: string = 'fr';
   eventsFromFb: Observable<Array<any>>;
   colors: any = {
     red: {
@@ -70,6 +74,10 @@ export class SchedulerComponent implements OnInit {
     },
     blue: {
       primary: '#1e90ff',
+      secondary: '#f5f5f5'
+    },
+    blueAko: {
+      primary: '#4da7d9',
       secondary: '#D1E8FF'
     },
     yellow: {
@@ -80,6 +88,10 @@ export class SchedulerComponent implements OnInit {
   
  
  ngOnInit(): void {
+   
+   if(this.elRef.nativeElement.clientWidth<= 400){
+     this.smallscreen = true;
+   }
    if(this.eventsService.loadsIndex==0){
       this.router.navigate(['/']);
    }
@@ -106,7 +118,7 @@ export class SchedulerComponent implements OnInit {
   allEvents: Observable<Array<ICalendarEvent<any>>>;
   events: ICalendarEvent[] = [];
   
-  constructor(private http: HttpClient, private db: AngularFireDatabase, private eventsService: EventsService, private router: Router ) {}
+  constructor(private http: HttpClient, private db: AngularFireDatabase, private eventsService: EventsService, private router: Router, private elRef: ElementRef ) {}
   
   fetchEvents(){
   this.eventsService.events$.subscribe((queriedItems: ICalendarEvent[])=> {
@@ -151,7 +163,7 @@ export class SchedulerComponent implements OnInit {
     if( this.view == 'day'){
       let e: ICalendarEvent<any> = {
       title :  "Event " + Math.random(),
-      color : this.colors.yellow,
+      color : this.colors.blueAko,
       start :  event.date,
       startTime :  event.date.getTime(),
       end : addHours(event.date, 1),

@@ -13,19 +13,34 @@
 
 .fixedTopLeft{
     position:fixed;
-    top:0px;
+    top:10px;
     left:0px;
 }
-
+.cal-month-view .cal-day-badge {
+    background-color: $ako-base-color; 
+}
 .cal-header {
  background-color: $light-gray;
  color: gray;   
 } 
-
+.cal-month-view .cal-header{
+    font-weight: normal;
+}
 .headergrey{
+     padding: 10px 0px;
  background-color: $light-gray;
 }
-
+.cal-open-day-events{
+    display:none;
+}
+.cal-month-view .cal-day-cell.cal-today .cal-day-number{
+         font-size: 1.2em;
+    font-weight: 400;
+}
+.cal-month-view .cal-day-cell.cal-today {
+    background-color: #d6e5fe;
+   
+}
 
 .centered{
 	text-align:center;
@@ -51,4 +66,26 @@
 
 :-ms-input-placeholder {  
    text-align: center; 
+}   
+
+.cal-day-view .cal-time {
+    font-weight: normal;
+    padding-top: 5px;
+    width: 70px;
+    text-align: center;
+    opacity: 0.5;
+}
+
+.floatingButton{
+   border-radius: 14px;
+    background-color: #727b84;
+    position: fixed;
+    left: 7px;
+    top: 14px;
+    color: white;
+    padding-bottom: 5px;
+}
+
+.floatingButton:hover{
+ background-color: dimgray;
 }

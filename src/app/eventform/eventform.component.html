@@ -5,27 +5,27 @@
 	  </div>
 	  <div class="form-group">
 	    <label for="exampleInputName">Nom</label>
-	    <input type="text" name="name"  class="form-control" id="exampleInputName" aria-describedby="nameHelp" placeholder="Entrez votre nom">
+	    <input type="text" [(ngModel)]="name" name="name"  class="form-control" id="exampleInputName" aria-describedby="nameHelp" placeholder="Entrez votre nom">
 	    <!-- small id="nameHelp" class="form-text text-muted">Entrez votre nom.</small  [(ngModel)]="event.nom"-->
 	  </div>
 	  <div class="form-group">
 	    <label for="exampleInputFirstname">Prenom</label>
-	    <input type="text" name="firstname"  class="form-control" id="exampleInputFirstname" aria-describedby="firstnameHelp" placeholder="Entrez votre prenom">
+	    <input type="text" [(ngModel)]="firstname" name="firstname"  class="form-control" id="exampleInputFirstname" aria-describedby="firstnameHelp" placeholder="Entrez votre prénom">
 	    <!--small id="firstnameHelp" class="form-text text-muted">Entrez votre prénom.</small [(ngModel)]="event.prenom"-->
 	  </div>
 	  <div class="form-group">
 	    <label for="exampleInputPhone">Numero de telephone</label>
-	    <input type="text" name="email" class="form-control"  id="exampleInputPhone" aria-describedby="phoneHelp" placeholder="Enter email">
+	    <input type="text" [(ngModel)]="email" name="email" class="form-control"  id="exampleInputPhone" aria-describedby="phoneHelp" placeholder="Entrer téléphone">
 	    <!--small id="emailHelp" [(ngModel)]="event.tel" class="form-text text-muted">Votre numéro ne sera utilisé que pour valider le rendez vous</small-->
 	  </div>
 	  <div class="form-group">
 	    <label for="exampleInputPhone">Code validation</label>
-	    <input type="text" name="code" class="form-control"  id="exampleInputCode" aria-describedby="codeHelp" placeholder="Enter code">
+	    <input type="text" name="code" [(ngModel)]="code" class="form-control"  id="exampleInputCode" aria-describedby="codeHelp" placeholder="Enter code">
 	    <!--small id="emailHelp" [(ngModel)]="event.codeValidation" class="form-text text-muted">Votre numéro ne sera utilisé que pour valider le rendez vous</small-->
 	  </div>
 	  <div class="form-group">
-	   <button type="button" routerLink="/calendar" routerLinkActive="active" class="btn btn-primary">Annuler</button>
-	   <button type="button" (click)="onSubmit()"  routerLinkActive="active" class="btn btn-success">Suivant</button>
+	   <button type="button" routerLink="/calendar" routerLinkActive="active" class="btn btn-second	ary">Annuler</button>
+	   <button type="button" (click)="onSubmit()"  routerLinkActive="active" class="btn btn-primary">Suivant</button>
 	  </div>
 	  
 	  

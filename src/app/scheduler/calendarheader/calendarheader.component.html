@@ -27,13 +27,12 @@
         </div>
       </div>
       <div class="col-md-4 fixedTopLeft">
-        <div class="btn-group">
-          <div *ngIf="view === 'day'"
-            class="btn btn-secondary"
+		<span *ngIf="view === 'day'"
+            class="floatingButton"
             (click)="viewChange.emit('month')"
-            [class.active]="view === 'month'">
-            retour
-          </div>
+            [class.active]="view === 'month'" aria-hidden="true">&nbsp;x&nbsp;</span>
+        <div class="btn-group">
+         
           <!-- div
             class="btn btn-primary"
             (click)="viewChange.emit('week')"

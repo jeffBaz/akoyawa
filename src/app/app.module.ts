@@ -18,6 +18,11 @@ import { ErrorComponent } from './error/error.component';
 import { HomeComponent } from './home/home.component';
 import { EventsService } from './services/events.service';
 import { RouterModule, Routes } from '@angular/router';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+
+
+
 
 export const firebaseConfig = {
       apiKey: 'AIzaSyB8efztwXl-AKhdQKqfdpbqSwmNtrpnulo',
@@ -37,6 +42,9 @@ const appRoutes: Routes = [
   },
   { path: '**', component: ErrorComponent }
 ];
+
+registerLocaleData(localeFr);
+
 @NgModule({
   declarations: [
     AppComponent,
