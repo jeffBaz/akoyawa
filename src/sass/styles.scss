@@ -1,0 +1,54 @@
+@import './variables';
+@import './mixins';
+
+@import '~angular-calendar/css/angular-calendar.css';
+@import '~bootstrap/scss/bootstrap';
+
+
+.btn-primary{
+
+	background-color: $ako-base-color; 
+    border-color: $ako-base-color; 
+}
+
+.fixedTopLeft{
+    position:fixed;
+    top:0px;
+    left:0px;
+}
+
+.cal-header {
+ background-color: $light-gray;
+ color: gray;   
+} 
+
+.headergrey{
+ background-color: $light-gray;
+}
+
+
+.centered{
+	text-align:center;
+    margin: 0 auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+::-webkit-input-placeholder {
+   text-align: center;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   text-align: center;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   text-align: center;  
+}
+
+:-ms-input-placeholder {  
+   text-align: center; 
+}

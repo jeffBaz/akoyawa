@@ -1,55 +1,51 @@
- <div class="row text-center">
-      <div class="col-md-4">
+ <div class="row text-center headergrey">
+      <div class="col-md-12">
         <div class="btn-group">
           <div
-            class="btn btn-primary"
+            class="btn btn-secondary"
             mwlCalendarPreviousView
             [view]="view"
             [(viewDate)]="viewDate"
             (viewDateChange)="viewDateChange.next(viewDate)">
-            Previous
+            <<
           </div>
           <div
-            class="btn btn-outline-secondary"
+            class="btn btn-secondary"
             mwlCalendarToday
             [(viewDate)]="viewDate"
             (viewDateChange)="viewDateChange.next(viewDate)">
-            Today
+             {{ viewDate |  calendarDate:(view + 'ViewTitle'):locale }}
           </div>
           <div
-            class="btn btn-primary"
+            class="btn btn-secondary"
             mwlCalendarNextView
             [view]="view"
             [(viewDate)]="viewDate"
             (viewDateChange)="viewDateChange.next(viewDate)">
-            Next
+            >>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <h3>{{ viewDate |  calendarDate:(view + 'ViewTitle'):locale }}</h3>
-      </div>
-      <div class="col-md-4">
+      <div class="col-md-4 fixedTopLeft">
         <div class="btn-group">
-          <div
-            class="btn btn-primary"
+          <div *ngIf="view === 'day'"
+            class="btn btn-secondary"
             (click)="viewChange.emit('month')"
             [class.active]="view === 'month'">
-            Month
+            retour
           </div>
           <!-- div
             class="btn btn-primary"
             (click)="viewChange.emit('week')"
             [class.active]="view === 'week'">
             Week
-          </div-->
+          </div>
           <div
             class="btn btn-primary"
             (click)="viewChange.emit('day')"
             [class.active]="view === 'day'">
             Day
-          </div>
+          </div-->
         </div>
       </div>
     </div>
-    <br>
