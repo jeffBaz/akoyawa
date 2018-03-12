@@ -29,13 +29,13 @@ export const firebaseConfig = {
 };
 const appRoutes: Routes = [
   { path: 'calendar', component: SchedulerComponent },
-  { path: '*', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'rdv',      component: EventformComponent },
   { path: '',
     redirectTo: '/home',
     pathMatch: 'full'
   },
-  { path: '**', component: HomeComponent }
+  { path: '**', component: ErrorComponent }
 ];
 @NgModule({
   declarations: [

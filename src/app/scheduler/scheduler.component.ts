@@ -81,7 +81,7 @@ export class SchedulerComponent implements OnInit {
  
  ngOnInit(): void {
    if(this.eventsService.loadsIndex==0){
-  //   this.router.navigate(['/']);
+      this.router.navigate(['/']);
    }
  
    this.toggleCalendar = 'show';
@@ -152,13 +152,13 @@ export class SchedulerComponent implements OnInit {
       this.eventsFromFb = this.validateEvent(e);
             // subscribe to changes
       this.filteredEvents = _.filter(this.events, function(o) {
-        let flag = o.startTime<=e.startTime && o.endTime>=e.startTime ;
+        let flag = o.startTime<=e.startTime && o.endTime>e.startTime ;
          return  flag;
       });
       if (this.filteredEvents.length == 0) {
         this.viewDate = event.date;
         this.eventsService.eventSelected = e;
-         this.router.navigate(['/rdv']);
+        this.router.navigate(['/rdv']);
         //this.db.list('/events').push(e);
         
         

@@ -1,29 +1,42 @@
-<form (ngSubmit)="onSubmit()">
-  <div class="form-group">
-    <label for="exampleInput">Veuillez renseigner vos informations personnel</label>
-  </div>
-  <div class="form-group">
-    <label for="exampleInputName">Nom</label>
-    <input type="text" name="name"  class="form-control" id="exampleInputName" aria-describedby="nameHelp" placeholder="Entrez votre nom">
-    <!-- small id="nameHelp" class="form-text text-muted">Entrez votre nom.</small  [(ngModel)]="event.nom"-->
-  </div>
-  <div class="form-group">
-    <label for="exampleInputFirstname">Prenom</label>
-    <input type="text" name="firstname"  class="form-control" id="exampleInputFirstname" aria-describedby="firstnameHelp" placeholder="Entrez votre prenom">
-    <!--small id="firstnameHelp" class="form-text text-muted">Entrez votre prénom.</small [(ngModel)]="event.prenom"-->
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPhone">Numero de telephone</label>
-    <input type="text" name="email" class="form-control"  id="exampleInputPhone" aria-describedby="phoneHelp" placeholder="Enter email">
-    <!--small id="emailHelp" [(ngModel)]="event.tel" class="form-text text-muted">Votre numéro ne sera utilisé que pour valider le rendez vous</small-->
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPhone">Code validation</label>
-    <input type="text" name="code" class="form-control"  id="exampleInputCode" aria-describedby="codeHelp" placeholder="Enter code">
-    <!--small id="emailHelp" [(ngModel)]="event.codeValidation" class="form-text text-muted">Votre numéro ne sera utilisé que pour valider le rendez vous</small-->
-  </div>
-  <div class="form-group">
-   <button type="button" routerLink="/calendar" routerLinkActive="active" class="btn btn-primary">Annuler</button>
-   <button type="button" (click)="onSubmit()"  routerLinkActive="active" class="btn btn-success">Suivant</button>
-  </div>
- </form>
+<div id="FormEventCreate" class="centered" >
+	<form (ngSubmit)="onSubmit()" [@toggleState]="toggleForm">
+	  <div class="form-group">
+	    <label for="exampleInput">Veuillez renseigner vos informations personnel</label>
+	  </div>
+	  <div class="form-group">
+	    <label for="exampleInputName">Nom</label>
+	    <input type="text" name="name"  class="form-control" id="exampleInputName" aria-describedby="nameHelp" placeholder="Entrez votre nom">
+	    <!-- small id="nameHelp" class="form-text text-muted">Entrez votre nom.</small  [(ngModel)]="event.nom"-->
+	  </div>
+	  <div class="form-group">
+	    <label for="exampleInputFirstname">Prenom</label>
+	    <input type="text" name="firstname"  class="form-control" id="exampleInputFirstname" aria-describedby="firstnameHelp" placeholder="Entrez votre prenom">
+	    <!--small id="firstnameHelp" class="form-text text-muted">Entrez votre prénom.</small [(ngModel)]="event.prenom"-->
+	  </div>
+	  <div class="form-group">
+	    <label for="exampleInputPhone">Numero de telephone</label>
+	    <input type="text" name="email" class="form-control"  id="exampleInputPhone" aria-describedby="phoneHelp" placeholder="Enter email">
+	    <!--small id="emailHelp" [(ngModel)]="event.tel" class="form-text text-muted">Votre numéro ne sera utilisé que pour valider le rendez vous</small-->
+	  </div>
+	  <div class="form-group">
+	    <label for="exampleInputPhone">Code validation</label>
+	    <input type="text" name="code" class="form-control"  id="exampleInputCode" aria-describedby="codeHelp" placeholder="Enter code">
+	    <!--small id="emailHelp" [(ngModel)]="event.codeValidation" class="form-text text-muted">Votre numéro ne sera utilisé que pour valider le rendez vous</small-->
+	  </div>
+	  <div class="form-group">
+	   <button type="button" routerLink="/calendar" routerLinkActive="active" class="btn btn-primary">Annuler</button>
+	   <button type="button" (click)="onSubmit()"  routerLinkActive="active" class="btn btn-success">Suivant</button>
+	  </div>
+	  
+	  
+	 </form>
+	 <div *ngIf="transactionStatus=='success'" class="form-group" [@toggleState]="toggleSuccess">
+		  <div   class="raw"><img id="logo2"  [src]="logoPath" ></div>
+		  <br />
+		  <div class ="center">
+			Vous remercie pour votre confiance.<br /> <br />
+			
+			
+		  </div>
+	 </div>
+ </div>

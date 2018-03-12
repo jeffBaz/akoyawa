@@ -9,7 +9,7 @@ export class EventsService  {
   loadsIndex : number = 0;
   events : ICalendarEvent[];
   events$ : Observable<ICalendarEvent[]>;
-  
+  transactionStatus: string;
   constructor() { }
 
 }
