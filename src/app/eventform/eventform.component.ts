@@ -33,9 +33,9 @@ import { Router } from '@angular/router';
 })
 export class EventformComponent implements OnInit {
   event : ICalendarEvent;
-  name : string;
-  firstname : string;
-  telephone : string;
+  name : string="";
+  firstname : string="";
+  telephone : string="";
   code : string = "idClient"; 
   transactionStatus: string;
   toggleForm: String;

@@ -20,7 +20,7 @@ import { EventsService } from './services/events.service';
 import { RouterModule, Routes } from '@angular/router';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
-
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -63,6 +63,7 @@ registerLocaleData(localeFr);
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    FormsModule,
     CalendarModule.forRoot() , 
     RouterModule.forRoot(
       appRoutes,
