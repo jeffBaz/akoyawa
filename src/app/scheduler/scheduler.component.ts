@@ -86,6 +86,14 @@ export class SchedulerComponent implements OnInit {
  
    this.toggleCalendar = 'show';
    this.events = this.eventsService.events;
+   this.eventsService.eventsLoaded.subscribe((e)=>{
+     
+     if(e){
+      this.events = this.eventsService.events;
+      this.refresh.next();
+     }
+   
+   });
   // this.fetchEvents();
    //this.refresh.subscribe(value => {console.log(value)});
    /* setTimeout(()=>{    //<<<---    using ()=> syntax

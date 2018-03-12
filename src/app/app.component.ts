@@ -11,9 +11,10 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent implements OnInit {
   ngOnInit() {
-    console.log("loading...");
+    console.log("Initial loading...");
     this.eventService.events$ = this.db.list('/events').valueChanges() as Observable<ICalendarEvent[]>; 
     this.eventService.events$.subscribe((queriedItems: ICalendarEvent[])=> {
+        console.log("new input Detected");      
         queriedItems.forEach(function (value : ICalendarEvent) {
           let stDate = new Date();
           stDate.setTime(value.startTime);
@@ -24,8 +25,9 @@ export class AppComponent implements OnInit {
          
         });
       this.eventService.events = [...queriedItems];
+      this.eventService.eventsLoaded.emit(true);
       this.eventService.loadsIndex++;
-      console.log("loaded");
+      console.log("new Events loaded");
       });
   }
   
