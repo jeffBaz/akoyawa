@@ -36,7 +36,8 @@ export class EventformComponent implements OnInit {
   transactionStatus: string;
   toggleForm: String;
   toggleSuccess: String;
-   logoPath= '/assets/images/spaakoyawa_logoh_1.png';
+  toggleFailed: String;
+  logoPath= '/assets/images/spaakoyawa_logoh_1.png';
   
   constructor(private router:Router, private eventsService: EventsService, private db: AngularFireDatabase) { }
 
@@ -45,7 +46,8 @@ export class EventformComponent implements OnInit {
       this.router.navigate(['/']);
    }
     this.toggleSuccess='hide';
-    this.toggleForm='show';
+    this.toggleFailed ='hide';
+    this.toggleForm ='show';
     this.event = this.eventsService.eventSelected;
   }
 
@@ -53,7 +55,7 @@ export class EventformComponent implements OnInit {
      let database = this.db;
      let eventToInsert = this.event;
      let _this = this;
-    var handler = (<any>window).StripeCheckout.configure({
+     var handler = (<any>window).StripeCheckout.configure({
       key: 'pk_test_niEgiR12PfJwRB5D9yvwKIGw',
       locale: 'auto',
       token: function (token: any) {
@@ -62,6 +64,7 @@ export class EventformComponent implements OnInit {
         _this.transactionStatus = "success";
         _this.toggleSuccess='show';
         _this.toggleForm='hide';
+        
         // You can access the token ID with `token.id`.
         // Get the token ID to your server-side code for use.
       }
@@ -75,5 +78,11 @@ export class EventformComponent implements OnInit {
 
   }
 
-  
+  endTransaction(e){
+    if(e.element.id == "success" || e.element.id == "failed" && e.toState=='show'){
+        setTimeout(()=>{    //<<<---    using ()=> syntax
+        this.router.navigate(['home']);
+     },3000);
+    }
+  }
 }

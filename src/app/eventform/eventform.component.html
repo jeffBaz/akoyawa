@@ -30,13 +30,24 @@
 	  
 	  
 	 </form>
-	 <div *ngIf="transactionStatus=='success'" class="form-group" [@toggleState]="toggleSuccess" style = "width:80%">
-		  <div   class="raw"><img id="logo2"  [src]="logoPath" ></div>
-		  <br />
-		  <div class ="center">
-			Vous remercie pour votre confiance.<br /> <br />
-			
-			
-		  </div>
-	 </div>
+	 <div *ngIf="transactionStatus=='success' || transactionStatus=='failed'"  class="centered" >
+		 <div *ngIf="transactionStatus=='success'" id="success" class="form-group" [@toggleState]="toggleSuccess" (@toggleState.done)="endTransaction($event)" >
+			  <div   class="raw"><img id="logo2"  [src]="logoPath"  style="width:80%" ></div>
+			  <br />
+			  <div class ="center">
+				Vous remercie pour votre confiance.<br /> <br />
+				
+				
+			  </div>
+		 </div>
+		  <div *ngIf="transactionStatus=='failed'" id="failed" class="form-group" [@toggleState]="toggleFailed" (@toggleState.done)="endTransaction($event)">
+			  <div   class="raw"><img id="logo2"  [src]="logoPath"  style="width:80%" ></div>
+			  <br />
+			  <div class ="center">
+				Votre transaction n'a pas pu aboutir. Nous nous en excusons.<br /> <br />
+				
+				
+			  </div>
+		 </div>
+	</div>
  </div>
