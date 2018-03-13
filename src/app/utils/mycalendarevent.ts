@@ -5,6 +5,7 @@ export interface ICalendarEvent<MetaType = any> extends CalendarEvent {
     nom?:string;
     prenom?:string;
     tel?:string;
-    codeValidation?:string;
+    codeValidation?:number;
+    description?:string;
   
 }

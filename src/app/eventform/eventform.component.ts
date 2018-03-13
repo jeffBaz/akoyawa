@@ -36,7 +36,8 @@ export class EventformComponent implements OnInit {
   name : string="";
   firstname : string="";
   telephone : string="";
-  code : string = "idClient"; 
+  code : number = Math.random(); 
+  desc: string = '';
   transactionStatus: string;
   toggleForm: String;
   toggleSuccess: String;
@@ -57,7 +58,9 @@ export class EventformComponent implements OnInit {
 
    onSubmit() {
      let database = this.db;
+     this.event.title = this.firstname + ' ' + this.name; 
      this.event.nom = this.name;
+     this.event.description = this.desc;
      this.event.prenom = this.firstname;
      this.event.tel = this.telephone;
      this.event.codeValidation = this.code;
