@@ -21,6 +21,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { FormsModule } from '@angular/forms';
+import { PrestatairesComponent } from './prestataires/prestataires.component';
 
 
 
@@ -34,6 +35,7 @@ export const firebaseConfig = {
 };
 const appRoutes: Routes = [
   { path: 'calendar', component: SchedulerComponent },
+  { path: 'prestation', component: PrestatairesComponent },
   { path: 'home', component: HomeComponent },
   { path: 'rdv',      component: EventformComponent },
   { path: '',
@@ -53,7 +55,8 @@ registerLocaleData(localeFr);
     DialogComponent,
     EventformComponent,
     ErrorComponent,
-    HomeComponent
+    HomeComponent,
+    PrestatairesComponent
   ],
   imports: [
     BrowserModule,
