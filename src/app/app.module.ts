@@ -21,6 +21,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { FormsModule } from '@angular/forms';
+import { PrestationsComponent } from './prestations/prestations.component';
 
 
 
@@ -53,7 +54,8 @@ registerLocaleData(localeFr);
     DialogComponent,
     EventformComponent,
     ErrorComponent,
-    HomeComponent
+    HomeComponent,
+    PrestationsComponent
   ],
   imports: [
     BrowserModule,
