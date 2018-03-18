@@ -1,0 +1,13 @@
+<nav class="navbar fixed-top navbar-light bg-light">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <img alt="Brand" [src]="miniLogoSrc" class="logoHeader">
+      </a>
+      <a class="navbar-brand cartPosToLeft" href="#"> 
+			<span class="cart" ><img alt="cart" [src]="cartImgSrc" class="cartHeader"></span>
+			<span *ngIf="nbArticle>0"class="cartNumber" >{{nbArticle}}</span>
+	</a>
+    </div>
+  </div>
+</nav>

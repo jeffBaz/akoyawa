@@ -39,9 +39,9 @@ export class HomeComponent implements OnInit {
   constructor(private router:Router,  private db: AngularFireDatabase,private eventsService: EventsService) { }
 
   ngOnInit() {
-    
+   
     this.toggleLogo = 'hide';
-    this.toggleLoader = 'show';
+     this.toggleLoader = 'show';
      this.eventsService.events$.subscribe(()=>{
         while(this.eventsService.loadsIndex==0){
           console.log("waiting for loading... index: "+ this.eventsService.loadsIndex);
