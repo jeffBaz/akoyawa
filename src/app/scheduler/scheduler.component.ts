@@ -88,7 +88,7 @@ export class SchedulerComponent implements OnInit {
   
  
  ngOnInit(): void {
-   
+   this.eventsService.displayCalendarHeader();
    if(this.elRef.nativeElement.clientWidth<= 400){
      this.smallscreen = true;
    }
@@ -97,7 +97,7 @@ export class SchedulerComponent implements OnInit {
    }
  
    this.toggleCalendar = 'show';
-   this.events = this.eventsService.events;
+   // this.events = this.eventsService.events;
    this.eventsService.eventsLoaded.subscribe((e)=>{
      
      if(e){
@@ -171,19 +171,20 @@ export class SchedulerComponent implements OnInit {
       }
       this.eventsFromFb = this.validateEvent(e);
             // subscribe to changes
-      this.filteredEvents = _.filter(this.events, function(o) {
+      this.filteredEvents = _.filter(this.eventsService.events, function(o) {
         let flag = o.startTime<=e.startTime && o.endTime>e.startTime ;
          return  flag;
       });
       if (this.filteredEvents.length == 0) {
         this.viewDate = event.date;
         this.eventsService.eventSelected = e;
-        this.router.navigate(['/rdv']);
+        this.eventsService.addPrestationToPanier();
+        //this.router.navigate(['/rdv']);
         //this.db.list('/events').push(e);
         
         
       }else{
-        alert("Ce créneau est pris veuillez en sélectionner un autre");
+        this.eventsService.errorMsg.emit("Ce créneau est déja réservé. Veuillez en sélectionner un autre.")
       }
        
      
@@ -191,6 +192,22 @@ export class SchedulerComponent implements OnInit {
       console.log('clickedDate :', this.viewDate);
       this.view = 'day';
       this.viewDate = event.day.date;
+    }
+  }
+   // exclude weekends
+  excludeDays: number[] = [0];
+
+  skipWeekends(direction: 'back' | 'forward'): void {
+    if (this.view === 'day') {
+      if (direction === 'back') {
+        while (this.excludeDays.indexOf(this.viewDate.getDay()) > -1) {
+          this.viewDate = subDays(this.viewDate, 1);
+        }
+      } else if (direction === 'forward') {
+        while (this.excludeDays.indexOf(this.viewDate.getDay()) > -1) {
+          this.viewDate = addDays(this.viewDate, 1);
+        }
+      }
     }
   }
 }

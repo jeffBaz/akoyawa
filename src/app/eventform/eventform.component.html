@@ -23,9 +23,12 @@
 	    <input type="text" name="code" [(ngModel)]="code" disabled class="form-control"  id="exampleInputCode" aria-describedby="codeHelp" >
 	    <!--small id="emailHelp" [(ngModel)]="event.codeValidation" class="form-text text-muted">Votre num&eacute;ro ne sera utilis&eacute; que pour valider le rendez vous</small-->
 	  </div>
+	   <div class="form-group">
+	    <label for="exampleInput">Ci-après la liste de vos prestations: </label>
+	    <app-prestataires [prestationsInput]="panier.prestation"></app-prestataires>
+	  </div>
 	  <div class="form-group">
-	    <label for="exampleInputPhone">Description</label>
-	    <textarea type="text" name="description" [(ngModel)]="desc" class="form-control"  id="exampleInputDesc" aria-describedby="codeHelp" placeholder="Que souhaitez vous faire?"></textarea>
+	    <label for="totalLbl" > <h4 class="card-title">Montant TTC: </h4></label><label for="totalLbl">{{totalTTC}} € </label>
 	    <!--small id="emailHelp" [(ngModel)]="event.codeValidation" class="form-text text-muted">Votre num&eacute;ro ne sera utilis&eacute; que pour valider le rendez vous</small-->
 	  </div>
 	  <div class="form-group">

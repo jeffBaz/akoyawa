@@ -10,6 +10,10 @@ export class HeaderComponent implements OnInit {
   miniLogoSrc: string ="assets/images/logo.png";
   cartImgSrc:  string ="assets/images/cart.png";
   nbArticle:number=0;
+  view='month';
+  locale: string = 'fr';
+  viewDate: Date = new Date();
+  isCalendarDisplayed:boolean =false;
   constructor(private eventService:EventsService) { }
 
   ngOnInit() {
@@ -18,6 +22,7 @@ export class HeaderComponent implements OnInit {
         this.nbArticle = this.eventService.panier.prestation.length;
       }
     });
+   
   }
 
 }

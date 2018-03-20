@@ -24,6 +24,7 @@ import { FormsModule } from '@angular/forms';
 import { PrestationsComponent } from './prestations/prestations.component';
 import { PrestatairesComponent } from './prestataires/prestataires.component';
 import { HeaderComponent } from './header/header.component';
+import { ModalModule } from 'ngx-bootstrap';
 
 
 
@@ -71,6 +72,7 @@ registerLocaleData(localeFr);
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     FormsModule,
+    ModalModule.forRoot(), 
     CalendarModule.forRoot() , 
     RouterModule.forRoot(
       appRoutes,

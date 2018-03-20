@@ -5,6 +5,7 @@ export interface Panier {
 
 export interface Prestation {
 	prestataire?:Prestataire;
+  idPrestation:string;
 	datePrestation?:Date;
 	titre:string;
 	desc:string;

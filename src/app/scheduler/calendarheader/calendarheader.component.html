@@ -1,5 +1,5 @@
  <div class="row text-center headergrey">
-      <div class="col-md-12">
+      <div *ngIf="view=='month'" class="col-md-12">
         <div class="btn-group">
           <div
             class="btn btn-secondary"
@@ -14,7 +14,7 @@
             mwlCalendarToday
             [(viewDate)]="viewDate"
             (viewDateChange)="viewDateChange.next(viewDate)">
-             {{ viewDate |  calendarDate:(view + 'ViewTitle'):locale }}
+             {{ viewDate |  date:'MMM y':locale }}
           </div>
           <div
             class="btn btn-secondary"
@@ -30,7 +30,7 @@
 		<span *ngIf="view === 'day'"
             class="floatingButton"
             (click)="viewChange.emit('month')"
-            [class.active]="view === 'month'" aria-hidden="true">&nbsp;x&nbsp;</span>
+            [class.active]="view === 'month'" aria-hidden="true">retour</span>
         <div class="btn-group">
          
           <!-- div

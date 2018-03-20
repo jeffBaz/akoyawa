@@ -1,5 +1,6 @@
 import { EventsService } from '../services/events.service';
 import { ICalendarEvent } from '../utils/mycalendarevent';
+import { Panier } from '../utils/panier';
 import { Component, OnInit } from '@angular/core';
 import { CalendarEvent } from 'angular-calendar';
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -33,6 +34,8 @@ import { Router } from '@angular/router';
 })
 export class EventformComponent implements OnInit {
   event : ICalendarEvent;
+  panier: Panier;
+  totalTTC: number = 0;
   name : string="";
   firstname : string="";
   telephone : string="";
@@ -54,8 +57,16 @@ export class EventformComponent implements OnInit {
     this.toggleFailed ='hide';
     this.toggleForm ='show';
     this.event = this.eventsService.eventSelected;
-  }
+    this.panier = this.eventsService.panier;
+    this.calculateTotal();
 
+  }
+  calculateTotal(){
+    for (let item of this.eventsService.panier.prestation){
+      this.totalTTC += item.prix + 0.2*item.prix;
+    }
+   
+  }
    onSubmit() {
      let database = this.db;
      this.event.title = this.firstname + ' ' + this.name; 
@@ -84,7 +95,7 @@ export class EventformComponent implements OnInit {
     handler.open({
       name: 'Demo Site',
       description: '2 widgets',
-      amount: 2000
+      amount: this.totalTTC*100
     });
 
   }

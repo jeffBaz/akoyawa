@@ -1,10 +1,10 @@
 <div class="calendarContainer container">
 	<div id="calendar-content" [@toggleState]="toggleCalendar">
-		<mwl-demo-utils-calendar-header
-		  [(view)]="view"
-		   [locale]="locale"
-		  [(viewDate)]="viewDate">
-		</mwl-demo-utils-calendar-header>
+	 <mwl-demo-utils-calendar-header 
+	  [(view)]="view"
+	   [locale]="locale"
+	  [(viewDate)]="viewDate">
+	</mwl-demo-utils-calendar-header>
 		
 		<div [ngSwitch]="view">
 			<mwl-calendar-day-view
