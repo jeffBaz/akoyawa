@@ -33,7 +33,7 @@ export class PrestatairesComponent implements OnInit {
      this.modalTitle='Informations:';
         if(this.eventService.panier && this.eventService.panier.prestation.length>0){
           this.isPanierEmpty = false;
-          this.modalMsg='Sélectionner un autre produits ou passez directement au paiement.';
+          this.modalMsg='Votre sélection a été ajouté à votre panier. Continuer vos achats ou passer directement au paiement.';
         }
        
         if(this.eventService.panier.prestation.length<=1){
@@ -62,7 +62,6 @@ export class PrestatairesComponent implements OnInit {
   	 this.router.navigate(['calendar']);
   }
   openModal(template: TemplateRef<any>) {
-    
     this.modalRef = this.modalService.show(template);
   }
 }

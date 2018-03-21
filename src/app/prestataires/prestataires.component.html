@@ -18,13 +18,18 @@
 	</ng-template>
 	<div  *ngFor="let prestation of prestations" class="card col-md-5 draggable">
 		<div *ngIf="selectedId!=prestation.idPrestation">
-		    <!--Card image-->
-		    <img class="img-fluid" [src]="prestation.url" alt="Card image cap">
-		
+		   
 		    <!--Card content-->
 		    <div class="card-body">
 		        <!--Title-->
-		        <h4 class="card-title">{{prestation.titre}}</h4>
+		        <h4 class="card-title">{{prestation.titre}} 
+		        	 <button  *ngIf="mode=='panier'" type="button" class="close pull-right" aria-label="Close"  (click)="removeFromPanier(prestation)">
+				      <span aria-hidden="true">&times;</span>
+				    </button>
+				 </h4>
+				  <!--Card image-->
+		   		 <img class="img-fluid" [src]="prestation.url" alt="Card image cap">
+		
 		        <!--Text-->
 		        <p class="card-text">{{prestation.desc}}</p>
 		        <p *ngIf="mode=='panier'" class="card-text">{{prestation.datePrestation | date:'dd MMM y':locale}} à {{prestation.datePrestation | date:'HH':locale}}h</p>
@@ -35,11 +40,15 @@
 		    </div>
 		</div>
 	    <div *ngIf="selectedId==prestation.idPrestation">
-	    	<h4 class="card-title">{{prestation.titre}}</h4>
+	    	<h4 class="card-title">{{prestation.titre}}
+	    		<button type="button" class="close pull-right" aria-label="Close"  (click)="selectedId=''">
+			      <span aria-hidden="true">&times;</span>
+			    </button>
+	    	 </h4>
 	    	<app-scheduler  prestation="prestation"> </app-scheduler>
 		</div>
 	</div>
 </div>
-        <a routerLink="/rdv" *ngIf="!isPanierEmpty" class="btn btn-primary validatorBtn">Suivant</a>
+        <a routerLink="/rdv" *ngIf="!isPanierEmpty" class="btn btn-primary validatorBtn">Valider le panier</a>
 </div>
 <!--/.Card-->

@@ -5,10 +5,25 @@
         <img alt="Brand" [src]="miniLogoSrc" class="logoHeader">
       </a>
     
-      <a class="navbar-brand cartPosToLeft" href="#"> 
+      <a class="navbar-brand cartPosToLeft" (click)="openModal(panier)"> 
 			<span class="cart" ><img alt="cart" [src]="cartImgSrc" class="cartHeader"></span>
 			<span *ngIf="nbArticle>0"class="cartNumber" >{{nbArticle}}</span>
 	</a>
     </div>
   </div>
 </nav>
+
+ <ng-template #panier>
+	  <div class="modal-header">
+	    <h4 class="modal-title pull-left">Votre panier</h4>
+	    <button type="button" class="close pull-right" aria-label="Close"  (click)="modalRef.hide()">
+	      <span aria-hidden="true">&times;</span>
+	    </button>
+	  </div>
+	  	
+	  
+	  <div class="modal-body">
+	    <app-prestataires [prestationsInput]="cart.prestation"></app-prestataires>
+	  </div>
+	  
+</ng-template>

@@ -93,7 +93,7 @@ export class EventformComponent implements OnInit {
     });
 
     handler.open({
-      name: 'Demo Site',
+      name: 'Akoyawa',
       description: '2 widgets',
       amount: this.totalTTC*100
     });

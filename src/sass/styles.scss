@@ -12,6 +12,7 @@
 }
 
 a:not([href]).btn-primary{
+	transition: .5s ease;
 	background-color: $ako-base-color; 
     border-color: $ako-base-color; 
     color:#FFFFFF;
@@ -32,6 +33,9 @@ a:not([href]).btn-primary{
 } 
 .cal-month-view .cal-header{
     font-weight: normal;
+}
+.card{
+	margin:5px;
 }
 .headergrey{
      padding: 10px 0px;
@@ -107,4 +111,22 @@ a:not([href]).btn-primary{
 }
 #calendar-content{
     overflow-x: hidden;
+}
+.img-fluid{
+	margin-top:5px;
+	border-radius:15px; 
+	 opacity: 0.5;
+}
+
+
+
+.img-fluid:hover {
+  transition: .5s ease;
+  opacity: 1;
+}
+
+.card:hover {
+	
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: .5s ease;
 }
