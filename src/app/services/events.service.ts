@@ -9,11 +9,14 @@ export class EventsService  {
   eventSelected: ICalendarEvent;
   panier: Panier;
    selectedPrestation: Prestation;
-  prestations: Prestation[]=[{"idPrestation":"aojijfoij1","prestataire":{"idPrestataire":"aojijfoij1",  "nom":"Prestion", "prenom":"Martine"},"titre":"Massage", "duree":2, "desc":"massage de deux heures", "prix":14.5, "datePrestation":new Date()}]/*,
-  {"idPrestation":"aojijfoij2","prestataire":{"idPrestataire":"aojijfoij2",  "nom":"Prestion", "prenom":"Martine"},"titre":"Massage", "desc":"massage de 3 heures", "prix":14.5, "datePrestation":new Date()},{"idPrestation":"aojijfoij6","prestataire":{"idPrestataire":"aojijfoij6",  "nom":"Prestion", "prenom":"Martine"},"titre":"Massage", "desc":"massage de deux heures", "prix":14.5, "datePrestation":new Date()},
-  {"idPrestation":"aojijfoij3","prestataire":{"idPrestataire":"aojijfoij3",  "nom":"Prestion", "prenom":"Martine"},"titre":"Massage", "desc":"massage de 3 heures", "prix":14.5, "datePrestation":new Date()},{"idPrestation":"aojijfoij7","prestataire":{"idPrestataire":"aojijfoij7",  "nom":"Prestion", "prenom":"Martine"},"titre":"Massage", "desc":"massage de deux heures", "prix":14.5, "datePrestation":new Date()},
-  {"idPrestation":"aojijfoij4","prestataire":{"idPrestataire":"aojijfoij4",  "nom":"Prestion", "prenom":"Martine"},"titre":"Massage", "desc":"massage de 3 heures", "prix":14.5, "datePrestation":new Date()},
- {"idPrestation":"aojijfoij5","prestataire":{"idPrestataire":"aojijfoij5",  "nom":"Prestion", "prenom":"Martine"},"titre":"Massage", "desc":"massage de 3 heures", "prix":14.5, "datePrestation":new Date()}];*/
+  prestations: Prestation[]=[
+  {"idPrestation":"aojijfoij1","prestataire":{"idPrestataire":"aojijfoij1",  "nom":"Prestion", "prenom":"Martine"},"titre":"Massage","url":"https://as1.ftcdn.net/jpg/00/60/75/22/500_F_60752241_VgPMb2KqBwnEtU9PbF35uekSm3TUvCdG.jpg", "duree":2, "desc":"Massage de deux heures", "prix":25, "datePrestation":null},
+  {"idPrestation":"aojijfoij2","prestataire":{"idPrestataire":"aojijfoij2",  "nom":"Prestion", "prenom":"Martine"},"titre":"Massage AKO","url":"https://as2.ftcdn.net/jpg/01/29/18/49/500_F_129184958_888q2jBjRjCIkhKKbBmeyfDkpt9HXsmW.jpg", "duree":3, "desc":"Massage AKO de 3 heures", "prix":60, "datePrestation":null},
+  {"idPrestation":"aojijfoij6","prestataire":{"idPrestataire":"aojijfoij6",  "nom":"Prestion", "prenom":"Martine"},"titre":"Massage Zen","url":"https://as2.ftcdn.net/jpg/00/68/55/21/500_F_68552198_hyhj1EowLuRVKU795q2H28SVv9yyX0h4.jpg", "duree":2, "desc":"Massage Zen de deux heures", "prix":35, "datePrestation":null},
+  {"idPrestation":"aojijfoij3","prestataire":{"idPrestataire":"aojijfoij3",  "nom":"Prestion", "prenom":"Martine"},"titre":"Spa Ako","url":"https://as1.ftcdn.net/jpg/01/49/75/84/500_F_149758419_PyuLgOCvyakGBGFdYpfsdq7Oa39mbKVq.jpg", "duree":1, "desc":"Spa de 1 heures", "prix":40, "datePrestation":null},
+  {"idPrestation":"aojijfoij7","prestataire":{"idPrestataire":"aojijfoij7",  "nom":"Prestion", "prenom":"Martine"},"titre":"Soins visages Ako","url":"https://t4.ftcdn.net/jpg/00/56/81/71/240_F_56817152_FZgTN3yPu68zE9LEQwgTzs4Ew0Ep7WwD.jpg", "duree":1, "desc":"Soins visages Ako", "prix":14.5, "datePrestation":null},
+  {"idPrestation":"aojijfoij4","prestataire":{"idPrestataire":"aojijfoij4",  "nom":"Prestion", "prenom":"Martine"},"titre":"Coiffure","url":"https://t4.ftcdn.net/jpg/01/01/75/99/240_F_101759983_umTprjVtO6sJb8fn4lHPMnMi5WXjUoeE.jpg", "duree":1, "desc":"Coiffure", "prix":14.5, "datePrestation":null},
+ {"idPrestation":"aojijfoij5","prestataire":{"idPrestataire":"aojijfoij5",  "nom":"Prestion", "prenom":"Martine"},"titre":"Manucure/PÃ©dicure","url":"https://t4.ftcdn.net/jpg/00/56/63/53/240_F_56635333_ewHg0dF8TpvoixM1gAkBBc5m1HpFnJjI.jpg", "duree":1, "desc":"Manucure/PÃ©dicure", "prix":25, "datePrestation":null}];
   loadsIndex: number = 0;
   events: ICalendarEvent[];
   isCalendarDisplayed: boolean = false;
@@ -35,7 +38,7 @@ export class EventsService  {
       this.panier.prestation.push(prest);
       this.prestationLoaded.emit(true);
     }else{
-      this.errorMsg.emit("Aucune prestation n'a été sélectionnée.");
+      this.errorMsg.emit("Aucune prestation n'a ï¿½tï¿½ sï¿½lectionnï¿½e.");
     }
   }
   displayCalendarHeader(){

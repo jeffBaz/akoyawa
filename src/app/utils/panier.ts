@@ -11,6 +11,7 @@ export interface Prestation {
 	desc:string;
 	prix:number;
 	duree?:number;	
+  url?:string
 }
 
 

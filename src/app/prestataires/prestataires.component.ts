@@ -11,8 +11,8 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 export class PrestatairesComponent implements OnInit {
   prestations: Prestation[] ;
   modalTitle:string='Informations:';
-  modalMsg:string='Sélectionner une date puis un créneau horaire.';
-  msgValidationPrestation:string = "Choisissez un créneau"
+  modalMsg:string='SÃ©lectionner une date puis un crÃ©neau horaire.';
+  msgValidationPrestation:string = "Choisissez un crÃ©neau"
   selectedId: string = '';
   @Input() prestationsInput : Prestation[];
   @ViewChild("template") private modal: TemplateRef<any>;
@@ -33,7 +33,7 @@ export class PrestatairesComponent implements OnInit {
      this.modalTitle='Informations:';
         if(this.eventService.panier && this.eventService.panier.prestation.length>0){
           this.isPanierEmpty = false;
-          this.modalMsg='Sélectionnez un nouveau produit ou passer directement au paiement.';
+          this.modalMsg='SÃ©lectionner un autre produits ou passez directement au paiement.';
         }
        
         if(this.eventService.panier.prestation.length<=1){
@@ -54,7 +54,7 @@ export class PrestatairesComponent implements OnInit {
      this.modalTitle='Informations:';
    
      if(this.eventService.panier && this.eventService.panier.prestation.length==0){
-       this.modalMsg='Sélectionner une date puis un créneau horaire.';
+       this.modalMsg='SÃ©lectionner une date puis un crÃ©neau horaire';
        this.openModal(template);
     }
   }

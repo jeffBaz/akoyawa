@@ -19,7 +19,7 @@
 	<div  *ngFor="let prestation of prestations" class="card col-md-5 draggable">
 		<div *ngIf="selectedId!=prestation.idPrestation">
 		    <!--Card image-->
-		    <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" alt="Card image cap">
+		    <img class="img-fluid" [src]="prestation.url" alt="Card image cap">
 		
 		    <!--Card content-->
 		    <div class="card-body">

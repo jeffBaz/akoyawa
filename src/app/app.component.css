@@ -2,8 +2,10 @@
 	text-align:center;
 }
 .pageContainer{
+	text-align: center;
+    margin: auto;
 	max-width:850px;
 }
 .pageContent{
-	margin-top:90px;
+	margin-top:77px;
 }
