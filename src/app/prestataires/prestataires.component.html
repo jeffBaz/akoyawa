@@ -28,8 +28,8 @@
 		        <!--Text-->
 		        <p class="card-text">{{prestation.desc}}</p>
 		        <p *ngIf="mode=='panier'" class="card-text">{{prestation.datePrestation | date:'dd MMM y':locale}} à {{prestation.datePrestation | date:'HH':locale}}h</p>
-		        <p class="card-text">tarif: {{prestation.prix}}</p>
-		         <p class="card-text">durée: {{prestation.duree}}h</p>
+		        <p class="card-text"><b>tarif:</b> {{prestation.prix}}€</p>
+		         <p class="card-text"><b>durée:</b> {{prestation.duree}}h</p>
 		        
 		        <a (click)="addPanier(prestation, template);"  *ngIf="mode=='catalogue'" class="btn btn-primary">{{msgValidationPrestation}}</a>
 		    </div>

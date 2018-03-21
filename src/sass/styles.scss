@@ -4,11 +4,18 @@
 @import '~angular-calendar/css/angular-calendar.css';
 @import '~bootstrap/scss/bootstrap';
 
-
 .btn-primary{
-
 	background-color: $ako-base-color; 
     border-color: $ako-base-color; 
+    color:#FFFFFF;
+    font-weight:bold;
+}
+
+a:not([href]).btn-primary{
+	background-color: $ako-base-color; 
+    border-color: $ako-base-color; 
+    color:#FFFFFF;
+    font-weight:bold;
 }
 
 .fixedTopLeft{
