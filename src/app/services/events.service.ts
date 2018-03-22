@@ -38,7 +38,7 @@ export class EventsService  {
       this.panier.prestation.push(prest);
       this.prestationLoaded.emit(true);
     }else{
-      this.errorMsg.emit("Aucune prestation n'a �t� s�lectionn�e.");
+      this.errorMsg.emit("Aucune prestation n'a été sélectionné.");
     }
   }
   displayCalendarHeader(){
@@ -49,5 +49,10 @@ export class EventsService  {
      this.isCalendarDisplayed = false;
     this.calendarDisplayed.emit( this.isCalendarDisplayed);
    
+  }
+  remove(prestation: Prestation){
+     let idx = this.panier.prestation.indexOf(prestation);
+     if (idx != -1) this.panier.prestation.splice(idx, 1);
+     this.prestationLoaded.emit(false);
   }
 }

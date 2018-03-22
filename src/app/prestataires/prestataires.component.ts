@@ -14,6 +14,7 @@ export class PrestatairesComponent implements OnInit {
   modalMsg:string='Sélectionner une date puis un créneau horaire.';
   msgValidationPrestation:string = "Choisissez un créneau"
   selectedId: string = '';
+  fullMode: boolean = false;
   @Input() prestationsInput : Prestation[];
   @ViewChild("template") private modal: TemplateRef<any>;
   isPanierEmpty: boolean = true;
@@ -63,5 +64,8 @@ export class PrestatairesComponent implements OnInit {
   }
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
+  }
+  removeFromPanier(prestation:Prestation){
+    this.eventService.remove(prestation);
   }
 }

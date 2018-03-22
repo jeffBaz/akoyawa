@@ -59,9 +59,12 @@ export class EventformComponent implements OnInit {
     this.event = this.eventsService.eventSelected;
     this.panier = this.eventsService.panier;
     this.calculateTotal();
-
+    this.eventsService.prestationLoaded.subscribe((bool)=>{
+        this.calculateTotal();
+    });
   }
   calculateTotal(){
+    this.totalTTC=0;
     for (let item of this.eventsService.panier.prestation){
       this.totalTTC += item.prix + 0.2*item.prix;
     }

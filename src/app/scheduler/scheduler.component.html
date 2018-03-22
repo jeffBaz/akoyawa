@@ -33,7 +33,7 @@
 			   [locale]="locale"
 			  [activeDayIsOpen]="true"
 			  (dayClicked)="clickedDate = createEvent($event)"
-			  (eventClicked)="eventClicked($event)">
+			  (eventClicked)="eventClicked($event)" [excludeDays]="excludeDays">
 			</mwl-calendar-month-view>
 		</div>
 	</div>

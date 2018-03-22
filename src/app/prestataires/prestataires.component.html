@@ -1,4 +1,4 @@
-<div class="containerPrestation container" >
+<div class="containerPrestation container"  >
 <div class="row justify-content-center">
 <!--Card-->
 	 
@@ -16,8 +16,8 @@
 	  </div>
 	  
 	</ng-template>
-	<div  *ngFor="let prestation of prestations" class="card col-md-5 draggable">
-		<div *ngIf="selectedId!=prestation.idPrestation">
+	<div  *ngFor="let prestation of prestations" class="card col-md-5 draggable" (click)="fullMode =(fullMode==prestation.idPrestation)?'': prestation.idPrestation">
+		<div #card *ngIf="selectedId!=prestation.idPrestation "  >
 		   
 		    <!--Card content-->
 		    <div class="card-body">
@@ -31,12 +31,15 @@
 		   		 <img class="img-fluid" [src]="prestation.url" alt="Card image cap">
 		
 		        <!--Text-->
-		        <p class="card-text">{{prestation.desc}}</p>
+		      
 		        <p *ngIf="mode=='panier'" class="card-text">{{prestation.datePrestation | date:'dd MMM y':locale}} à {{prestation.datePrestation | date:'HH':locale}}h</p>
 		        <p class="card-text"><b>tarif:</b> {{prestation.prix}}€</p>
-		         <p class="card-text"><b>durée:</b> {{prestation.duree}}h</p>
-		        
-		        <a (click)="addPanier(prestation, template);"  *ngIf="mode=='catalogue'" class="btn btn-primary">{{msgValidationPrestation}}</a>
+		        <div *ngIf="fullMode==prestation.idPrestation">
+		        	<p class="card-text" ><b>durée:</b> {{prestation.duree}}h</p>
+			        <p class="card-text" >{{prestation.desc}}</p>
+			        <br>
+			        <a (click)="addPanier(prestation, template);"  *ngIf="mode=='catalogue'" class="btn btn-primary">{{msgValidationPrestation}}</a>
+		        </div>
 		    </div>
 		</div>
 	    <div *ngIf="selectedId==prestation.idPrestation">

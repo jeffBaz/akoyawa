@@ -2,7 +2,7 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { EventsService } from '../services/events.service';
 import { ICalendarEvent } from '../utils/mycalendarevent';
 import { Component, OnInit, ChangeDetectionStrategy, Input,  ViewChild,
-  TemplateRef, ElementRef  } from '@angular/core';
+  TemplateRef, ElementRef, ViewEncapsulation  } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { CalendarEvent,CalendarEventAction, CalendarDateFormatter,
   DAYS_OF_WEEK,
@@ -44,6 +44,7 @@ import { Subject } from 'rxjs/Subject';
   templateUrl: './scheduler.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./scheduler.component.css'],
+   encapsulation: ViewEncapsulation.None,
  animations: [
   trigger('toggleState', [
     state('show', style({
@@ -60,7 +61,8 @@ import { Subject } from 'rxjs/Subject';
 })
 export class SchedulerComponent implements OnInit {
   view = 'month';
-  refresh: Subject<any> = new Subject<any>();
+  
+  refresh: Subject<any> = new Subject();
   @Input() toggleCalendar: string;
   viewDate: Date = new Date();
   smallscreen: boolean = false;
@@ -86,18 +88,27 @@ export class SchedulerComponent implements OnInit {
     }
   }
   
- 
+ filteredEvents: ICalendarEvent[] = []; 
+  filters = {};
+  allEvents: Observable<Array<ICalendarEvent<any>>>;
+  events: ICalendarEvent[] = [{
+      title : "ttt",
+      color : this.colors.blueAko,
+      start :  new Date()
+     
+      }];
+  excludeDays: number[] = [0];
  ngOnInit(): void {
    this.eventsService.displayCalendarHeader();
    if(this.elRef.nativeElement.clientWidth<= 400){
      this.smallscreen = true;
    }
-   if(this.eventsService.loadsIndex==0){
+  /* if(this.eventsService.loadsIndex==0){
       this.router.navigate(['/']);
-   }
+   }*/
  
    this.toggleCalendar = 'show';
-   // this.events = this.eventsService.events;
+   this.events = this.eventsService.events;
    this.eventsService.eventsLoaded.subscribe((e)=>{
      
      if(e){
@@ -113,10 +124,6 @@ export class SchedulerComponent implements OnInit {
      },3000);*/
     
   }
-  filteredEvents: ICalendarEvent[] = []; 
-  filters = {};
-  allEvents: Observable<Array<ICalendarEvent<any>>>;
-  events: ICalendarEvent[] = [];
   
   constructor(private http: HttpClient, private db: AngularFireDatabase, private eventsService: EventsService, private router: Router, private elRef: ElementRef ) {}
   
@@ -162,7 +169,7 @@ export class SchedulerComponent implements OnInit {
    createEvent( event : any ): void {
     if( this.view == 'day'){
       let e: ICalendarEvent<any> = {
-      title :  "Event " + Math.random(),
+      title : this.eventsService.selectedPrestation.titre,
       color : this.colors.blueAko,
       start :  event.date,
       startTime :  event.date.getTime(),
@@ -178,13 +185,18 @@ export class SchedulerComponent implements OnInit {
       if (this.filteredEvents.length == 0) {
         this.viewDate = event.date;
         this.eventsService.eventSelected = e;
-        this.eventsService.addPrestationToPanier();
+        this.eventsService.events.push(e);
+        this.events=[...this.eventsService.events];
+        this.refresh.next();
+        setTimeout(()=>{    //<<<---    using ()=> syntax
+         this.eventsService.addPrestationToPanier();
+       },1500);
         //this.router.navigate(['/rdv']);
         //this.db.list('/events').push(e);
         
         
       }else{
-        this.eventsService.errorMsg.emit("Ce créneau est déja réservé. Veuillez en sélectionner un autre.")
+        this.eventsService.errorMsg.emit("Ce crÃ©neau est dÃ©ja rÃ©servÃ©. Veuillez en sÃ©lectionner un autre.")
       }
        
      
@@ -194,8 +206,6 @@ export class SchedulerComponent implements OnInit {
       this.viewDate = event.day.date;
     }
   }
-   // exclude weekends
-  excludeDays: number[] = [0];
 
   skipWeekends(direction: 'back' | 'forward'): void {
     if (this.view === 'day') {

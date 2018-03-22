@@ -30,10 +30,8 @@ export class HeaderComponent implements OnInit {
   }
   ngOnInit() {
      this.eventService.prestationLoaded.subscribe(bool=>{
-      if(bool){
         this.cart = this.eventService.panier;
         this.nbArticle = this.eventService.panier.prestation.length;
-      }
     });
    
   }
