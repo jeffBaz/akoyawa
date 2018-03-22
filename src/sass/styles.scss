@@ -34,9 +34,7 @@ a:not([href]).btn-primary{
 .cal-month-view .cal-header{
     font-weight: normal;
 }
-.card{
-	margin:5px;
-}
+
 .headergrey{
      padding: 10px 0px;
      position:fixed;
@@ -114,19 +112,32 @@ a:not([href]).btn-primary{
 }
 .img-fluid{
 	margin-top:5px;
-	border-radius:15px; 
+	border-radius:150px; 
 	 opacity: 0.5;
 }
 
 
 
-.img-fluid:hover {
+.card:hover .img-fluid {
   transition: .5s ease;
   opacity: 1;
+  border-radius:15px; 
 }
 
+.card{
+	transition: 1s ease;
+	margin:5px;
+	border-radius: 336px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  	
+}
+
+
 .card:hover {
-	
-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  transition: .5s ease;
+	transition: 1s ease;
+	margin:5px;
+	border-radius: inherit;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  	transition: .5s ease;
+  	border-color: $ako-base-color; 
 }
