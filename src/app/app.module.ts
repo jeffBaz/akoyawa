@@ -24,7 +24,9 @@ import { FormsModule } from '@angular/forms';
 import { PrestationsComponent } from './prestations/prestations.component';
 import { PrestatairesComponent } from './prestataires/prestataires.component';
 import { HeaderComponent } from './header/header.component';
+import { AngularFontAwesomeModule } from 'angular-font-awesome/dist';
 import { ModalModule } from 'ngx-bootstrap';
+
 
 
 
@@ -69,6 +71,7 @@ registerLocaleData(localeFr);
     MatDialogModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    AngularFontAwesomeModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,

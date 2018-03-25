@@ -20,16 +20,22 @@
 		<div #card *ngIf="selectedId!=prestation.idPrestation"  >
 		   
 		    <!--Card content-->
-		    <div [ngClass]="{ 'showAnime': success, 'hideAnime': !success, 'card-body': true }" >
+		    <!-- div [ngClass]="{ 'showAnime': success, 'hideAnime': !success, 'card-body': true }" >
 		    	 <img class="img-fluid" [src]="addToCart" alt="Card image cap">
-		    </div>
-		    <div  [ngClass]="{ 'hideAnime': success, 'showAnime': !success, 'card-body': true } ">
+		    </div-->
+		    <div  [ngClass]="{ 'card-body': true } ">
 		        <!--Title-->
-		        <h4 class="card-title">{{prestation.titre}} 
-		        	 <button  *ngIf="mode=='panier'" type="button" class="close pull-right" aria-label="Close"  (click)="removeFromPanier(prestation)">
+		      <div class="row">
+		      	<div class="col-md-10">
+		       		<h4 class="card-title">{{prestation.titre}} </h4>
+		        </div>
+		        <div class="col-md-2">
+		       		<fa  *ngIf="mode=='panier'"  name="trash"  (click)="removeFromPanier(prestation)">
 				      <span aria-hidden="true">&times;</span>
-				    </button>
-				 </h4>
+				    </fa>
+		        </div>
+		      </div> 
+				 
 				  <!--Card image-->
 		   		 <img class="img-fluid" [src]="prestation.url" alt="Card image cap">
 		

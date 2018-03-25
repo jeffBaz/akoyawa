@@ -35,6 +35,7 @@ export class EventsService  {
     if(prest==null)prest = this.selectedPrestation;
     if(prest){
       prest.datePrestation = this.eventSelected.start;
+      prest.codeValidation = this.eventSelected.codeValidation;
       this.panier.prestation.push(prest);
       this.prestationLoaded.emit(true);
     }else{
@@ -53,6 +54,17 @@ export class EventsService  {
   remove(prestation: Prestation){
      let idx = this.panier.prestation.indexOf(prestation);
      if (idx != -1) this.panier.prestation.splice(idx, 1);
+     if(prestation.datePrestation){
+      for(let event of this.events){
+        if (event.start.getTime() == prestation.datePrestation.getTime() && event.codeValidation == prestation.codeValidation){
+          let indx = this.events.indexOf(event);
+          this.events.splice(indx, 1);
+        }
+      }
+     }
      this.prestationLoaded.emit(false);
+  }
+  reset(){
+    this.panier = {"prestation":[]};
   }
 }

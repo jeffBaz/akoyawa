@@ -28,6 +28,7 @@ export class PrestatairesComponent implements OnInit {
   constructor(private eventService:EventsService, private router:Router, private modalService: BsModalService) { }
 
   ngOnInit() {
+    window.scrollTo(0,0);
     this.addToCart = "assets/images/cart.png";
     if(this.prestationsInput && this.prestationsInput.length>0){
       this.prestations = this.prestationsInput;

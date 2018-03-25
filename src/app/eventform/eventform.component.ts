@@ -67,13 +67,14 @@ export class EventformComponent implements OnInit {
   calculateTotal(){
     this.totalTTC=0;
     for (let item of this.eventsService.panier.prestation){
-      this.totalTTC += item.prix + 0.2*item.prix;
+      this.totalTTC += item.prix;
+      this.desc += "|" + item.titre + "|";
     }
    
   }
    onSubmit() {
      let database = this.db;
-     this.event.title = this.firstname + ' ' + this.name; 
+     this.event.title = this.firstname + ' ' + this.name + ' ' + this.desc; 
      this.event.nom = this.name;
      this.event.description = this.desc;
      this.event.prenom = this.firstname;
@@ -98,7 +99,7 @@ export class EventformComponent implements OnInit {
 
     handler.open({
       name: 'Akoyawa',
-      description: '2 widgets',
+      description: 'Soins' + this.desc,
       amount: this.totalTTC*100
     });
 
@@ -107,6 +108,7 @@ export class EventformComponent implements OnInit {
   endTransaction(e){
     if(e.element.id == "success" || e.element.id == "failed" && e.toState=='show'){
         setTimeout(()=>{    //<<<---    using ()=> syntax
+        this.eventsService.reset();
         this.router.navigate(['home']);
      },3000);
     }
