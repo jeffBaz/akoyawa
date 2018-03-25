@@ -16,11 +16,14 @@
 	  </div>
 	  
 	</ng-template>
-	<div  *ngFor="let prestation of prestations" class="card col-md-5 draggable" (click)="fullMode =(fullMode==prestation.idPrestation)?'': prestation.idPrestation">
-		<div #card *ngIf="selectedId!=prestation.idPrestation "  >
+	<div  *ngFor="let prestation of prestations"  [ngClass]="{'square': fixedSquared, 'card':true, 'col-md-5':true, 'draggable':true  }" (click)="showPrestation(prestation)" >
+		<div #card *ngIf="selectedId!=prestation.idPrestation"  >
 		   
 		    <!--Card content-->
-		    <div class="card-body">
+		    <div [ngClass]="{ 'showAnime': success, 'hideAnime': !success, 'card-body': true }" >
+		    	 <img class="img-fluid" [src]="addToCart" alt="Card image cap">
+		    </div>
+		    <div  [ngClass]="{ 'hideAnime': success, 'showAnime': !success, 'card-body': true } ">
 		        <!--Title-->
 		        <h4 class="card-title">{{prestation.titre}} 
 		        	 <button  *ngIf="mode=='panier'" type="button" class="close pull-right" aria-label="Close"  (click)="removeFromPanier(prestation)">

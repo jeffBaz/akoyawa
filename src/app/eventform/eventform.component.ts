@@ -50,6 +50,7 @@ export class EventformComponent implements OnInit {
   constructor(private router:Router, private eventsService: EventsService, private db: AngularFireDatabase) { }
 
   ngOnInit() {
+    window.scrollTo(0,0);
     if(this.eventsService.loadsIndex==0){
       this.router.navigate(['/']);
    }

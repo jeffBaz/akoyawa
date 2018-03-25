@@ -3,6 +3,8 @@ import { EventsService } from '../services/events.service';
 import { Panier, Prestation, Prestataire } from '../utils/panier';
 import { Router } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
+import { NgClass } from '@angular/common';
+
 @Component({
   selector: 'app-prestataires',
   templateUrl: './prestataires.component.html',
@@ -10,6 +12,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 })
 export class PrestatairesComponent implements OnInit {
   prestations: Prestation[] ;
+  success:boolean = false;
   modalTitle:string='Informations:';
   modalMsg:string='Sélectionner une date puis un créneau horaire.';
   msgValidationPrestation:string = "Choisissez un créneau"
@@ -19,10 +22,13 @@ export class PrestatairesComponent implements OnInit {
   @ViewChild("template") private modal: TemplateRef<any>;
   isPanierEmpty: boolean = true;
   modalRef: BsModalRef;
-  mode:string 
+  mode:string ;
+  addToCart:string ="assets/images/cart.png";
+  @Input() fixedSquared:string='false';
   constructor(private eventService:EventsService, private router:Router, private modalService: BsModalService) { }
 
   ngOnInit() {
+    this.addToCart = "assets/images/cart.png";
     if(this.prestationsInput && this.prestationsInput.length>0){
       this.prestations = this.prestationsInput;
       this.mode="panier";
@@ -34,12 +40,11 @@ export class PrestatairesComponent implements OnInit {
      this.modalTitle='Informations:';
         if(this.eventService.panier && this.eventService.panier.prestation.length>0){
           this.isPanierEmpty = false;
-          this.modalMsg='Votre sélection a été ajouté à votre panier. Continuer vos achats ou passer directement au paiement.';
         }
-       
-        if(this.eventService.panier.prestation.length<=1){
-          this.openModal(this.modal);
-        }     
+       this.success=true;
+      setTimeout(()=>{
+        this.success=false;
+      }, 2000);
     
     });
     this.eventService.errorMsg.subscribe((errorMsg)=>{
@@ -54,10 +59,6 @@ export class PrestatairesComponent implements OnInit {
     this.eventService.selectedPrestation = Object.assign({}, prestation) ;
      this.modalTitle='Informations:';
    
-     if(this.eventService.panier && this.eventService.panier.prestation.length==0){
-       this.modalMsg='Sélectionner une date puis un créneau horaire';
-       this.openModal(template);
-    }
   }
   suivant(){
   	 this.router.navigate(['calendar']);
@@ -67,5 +68,9 @@ export class PrestatairesComponent implements OnInit {
   }
   removeFromPanier(prestation:Prestation){
     this.eventService.remove(prestation);
+  }
+  showPrestation(prestation : Prestation){
+      this.eventService.selectedPrestation = prestation;
+      this.router.navigate(['/prestation']);
   }
 }

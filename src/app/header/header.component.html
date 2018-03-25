@@ -23,7 +23,7 @@
 	  	
 	  
 	  <div class="modal-body">
-	    <app-prestataires [prestationsInput]="cart.prestation"></app-prestataires>
+	    <app-prestataires fixedSquared='true' [prestationsInput]="cart.prestation"></app-prestataires>
 	  </div>
-	  
+	   <a routerLink="/rdv" *ngIf="cart.prestation.length>0" class="btn btn-primary validatorBtn">Passer au paiement</a>
 </ng-template>

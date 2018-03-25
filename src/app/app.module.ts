@@ -38,7 +38,8 @@ export const firebaseConfig = {
 };
 const appRoutes: Routes = [
   { path: 'calendar', component: SchedulerComponent },
-  { path: 'prestation', component: PrestatairesComponent },
+  { path: 'prestations', component: PrestatairesComponent },
+  { path: 'prestation', component: PrestationsComponent },
   { path: 'home', component: HomeComponent },
   { path: 'rdv',      component: EventformComponent },
   { path: '',

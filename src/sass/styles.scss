@@ -119,13 +119,13 @@ a:not([href]).btn-primary{
 
 
 .card:hover .img-fluid {
-  transition: .5s ease;
+  transition: 2s ease;
   opacity: 1;
   border-radius:15px; 
 }
 
 .card{
-	transition: 1s ease;
+	transition: 2s ease;
 	margin:5px;
 	border-radius: 336px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -134,10 +134,26 @@ a:not([href]).btn-primary{
 
 
 .card:hover {
-	transition: 1s ease;
+	transition: 2s ease;
 	margin:5px;
-	border-radius: inherit;
+	border-radius: 15px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  	transition: .5s ease;
   	border-color: $ako-base-color; 
+}
+.showAnime{
+	transition: 1s ease;
+	display:inline;
+	opacity:1;
+	
+}
+
+.hideAnime{
+	transition: 1s ease;
+	opacity:0;
+	display:none;
+}
+
+.square{
+	border-radius: 15px;
+  	
 }
