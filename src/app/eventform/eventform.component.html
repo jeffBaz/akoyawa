@@ -31,13 +31,12 @@
 	    <!--small id="emailHelp" [(ngModel)]="event.codeValidation" class="form-text text-muted">Votre num&eacute;ro ne sera utilis&eacute; que pour valider le rendez vous</small-->
 	  </div>
 	  <div class="form-group row justify-content-center">
-	  	<span class="col-md-5">
-	   		<button type="button" routerLink="/prestations" routerLinkActive="active" class="btn btn-secondary">Retour</button>
+	  	<span class="col-xs-6">
+	   		<button type="button" routerLink="/prestations" routerLinkActive="active" class="btn btn-secondary validatorBtn">Retour</button>
 	   	</span>
-	   	<span class="col-md-2">
-	   	</span>
-	   	<span class="col-md-5">
-	   		<button type="button" (click)="onSubmit()"  routerLinkActive="active" class="btn btn-primary">Paiement</button>
+	  
+	   	<span class="col-xs-6">
+	   		<button type="button" (click)="onSubmit()"  routerLinkActive="active" class="btn btn-primary validatorBtn">Paiement</button>
 	   	</span>
 	  </div>
 	  

@@ -138,7 +138,6 @@ a:not([href]).btn-primary{
 	margin:5px;
 	border-radius: 15px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  	border-color: $ako-base-color; 
 }
 .showAnime{
 	transition: 1s ease;
@@ -162,4 +161,16 @@ a:not([href]).btn-primary{
 }
 .full-cell {
       background-color: #e689d861 !important;
+}
+.validatorBtn{
+	margin:10px;
+	font-weight:bold;
+}
+.initCloser{
+	position:relative;
+}
+.closer{
+	
+	position:absolute;
+	right:10px;
 }
