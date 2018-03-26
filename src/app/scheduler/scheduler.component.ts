@@ -6,7 +6,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input,  ViewChild,
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { CalendarEvent,CalendarEventAction, CalendarDateFormatter,
   DAYS_OF_WEEK,
-  CalendarEventTimesChangedEvent } from 'angular-calendar';
+  CalendarEventTimesChangedEvent, CalendarMonthViewDay } from 'angular-calendar';
 import { map } from 'rxjs/operators/map';
 import { AngularFireDatabase } from 'angularfire2/database'; 
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
@@ -43,6 +43,12 @@ import { Subject } from 'rxjs/Subject';
   selector: 'app-scheduler',
   templateUrl: './scheduler.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+   providers: [
+    {
+      provide: CalendarDateFormatter,
+      useClass: CustomDateFormatter
+    }
+  ],
   styleUrls: ['./scheduler.component.css'],
    encapsulation: ViewEncapsulation.None,
  animations: [
@@ -91,13 +97,21 @@ export class SchedulerComponent implements OnInit {
  filteredEvents: ICalendarEvent[] = []; 
   filters = {};
   allEvents: Observable<Array<ICalendarEvent<any>>>;
-  events: ICalendarEvent[] = [{
-      title : "ttt",
-      color : this.colors.blueAko,
-      start :  new Date()
-     
-      }];
+  events: ICalendarEvent[] = [];
   excludeDays: number[] = [0];
+  beforeMonthViewRender({ body }: { body: CalendarMonthViewDay[] }): void {
+    var yesterday = new Date();
+
+    yesterday.setDate(new Date().getDate() - 1);
+    body.forEach(day => {
+      if (day.date.getTime()<yesterday.getTime()) {
+        day.cssClass = 'odd-cell';
+      }
+       if(day.events.length>=12){
+          day.cssClass = 'full-cell';
+       }
+    });
+  }
  ngOnInit(): void {
    this.eventsService.displayCalendarHeader();
    if(this.elRef.nativeElement.clientWidth<= 400){
@@ -149,7 +163,7 @@ export class SchedulerComponent implements OnInit {
     console.log('Event clicked', event);
   }
   validateEvent( eventDate : ICalendarEvent ){
-  return this.db.list('/events').valueChanges();
+    return this.db.list('/events').valueChanges();
   }
    applyFilters( ){
      console.log(this.events);
@@ -167,6 +181,9 @@ export class SchedulerComponent implements OnInit {
   }
   
    createEvent( event : any ): void {
+      var yesterday = new Date();
+
+    yesterday.setDate(new Date().getDate() - 1);
     if( this.view == 'day'){
       let e: ICalendarEvent<any> = {
       title : this.eventsService.selectedPrestation.titre,
@@ -200,10 +217,14 @@ export class SchedulerComponent implements OnInit {
       }
        
      
-    }else{
-      console.log('clickedDate :', this.viewDate);
-      this.view = 'day';
-      this.viewDate = event.day.date;
+    }else if (event.day.date.getTime()>=yesterday.getTime()) {
+      if(event.day.events.length<12){
+        console.log('clickedDate :', this.viewDate);
+        this.view = 'day';
+        this.viewDate = event.day.date;
+      }else{
+        this.eventsService.errorMsg.emit("Désolé, cette journée est maleureusement complète.")
+      }
     }
   }
 

@@ -16,7 +16,7 @@
 	  </div>
 	  
 	</ng-template>
-	<div   class="card col-md-12 draggable" (click)="fullMode =(fullMode==prestation.idPrestation)?'': prestation.idPrestation">
+	<div    [ngClass]="{'square': true, 'card':true, 'col-md-12':true, 'draggable':true  }"  (click)="fullMode =(fullMode==prestation.idPrestation)?'': prestation.idPrestation">
 		<div #card *ngIf="selectedId!=prestation.idPrestation "  >
 		   
 		    <!--Card content-->

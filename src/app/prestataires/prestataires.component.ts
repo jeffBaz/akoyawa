@@ -42,23 +42,14 @@ export class PrestatairesComponent implements OnInit {
         if(this.eventService.panier && this.eventService.panier.prestation.length>0){
           this.isPanierEmpty = false;
         }
-       this.success=true;
-      setTimeout(()=>{
-        this.success=false;
-      }, 2000);
+      
+    });
     
-    });
-    this.eventService.errorMsg.subscribe((errorMsg)=>{
-      this.modalTitle = "Erreur:"; 
-      this.modalMsg = errorMsg;
-      this.openModal(this.modal);
-    });
   }
-  addPanier(prestation, template){
+  addPanier(prestation){
     if(!this.eventService.panier) this.eventService.panier = {'prestation':[]};
     this.selectedId=prestation.idPrestation;
     this.eventService.selectedPrestation = Object.assign({}, prestation) ;
-     this.modalTitle='Informations:';
    
   }
   suivant(){

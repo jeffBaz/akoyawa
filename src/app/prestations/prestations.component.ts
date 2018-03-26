@@ -19,7 +19,7 @@ export class PrestationsComponent implements OnInit {
   selectedId: string = '';
   fullMode: boolean = false;
   @Input() prestationsInput : Prestation;
-  @ViewChild("template") private modal: TemplateRef<any>;
+ 
   isPanierEmpty: boolean = true;
   modalRef: BsModalRef;
   mode:string ;
@@ -45,11 +45,7 @@ export class PrestationsComponent implements OnInit {
        this.success=true;
      
     });
-    this.eventService.errorMsg.subscribe((errorMsg)=>{
-      this.modalTitle = "Erreur:"; 
-      this.modalMsg = errorMsg;
-      this.openModal(this.modal);
-    });
+   
   }
   addPanier(prestation, template){
     if(!this.eventService.panier) this.eventService.panier = {'prestation':[]};
@@ -65,9 +61,7 @@ export class PrestationsComponent implements OnInit {
   suivant(){
      this.router.navigate(['calendar']);
   }
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
-  }
+  
   removeFromPanier(prestation:Prestation){
     this.eventService.remove(prestation);
   }

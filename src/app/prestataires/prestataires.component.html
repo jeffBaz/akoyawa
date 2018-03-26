@@ -2,20 +2,7 @@
 <div class="row justify-content-center">
 <!--Card-->
 	 
-	<ng-template #template>
-	  <div class="modal-header">
-	    <h4 class="modal-title pull-left">{{modalTitle}}</h4>
-	    <button type="button" class="close pull-right" aria-label="Close"  (click)="modalRef.hide()">
-	      <span aria-hidden="true">&times;</span>
-	    </button>
-	  </div>
-	  	
-	  
-	  <div class="modal-body">
-	    {{modalMsg}}
-	  </div>
-	  
-	</ng-template>
+	
 	<div  *ngFor="let prestation of prestations"  [ngClass]="{'square': fixedSquared, 'card':true, 'col-md-5':true, 'draggable':true  }" (click)="showPrestation(prestation)" >
 		<div #card *ngIf="selectedId!=prestation.idPrestation"  >
 		   
@@ -47,7 +34,7 @@
 		        	<p class="card-text" ><b>durée:</b> {{prestation.duree}}h</p>
 			        <p class="card-text" >{{prestation.desc}}</p>
 			        <br>
-			        <a (click)="addPanier(prestation, template);"  *ngIf="mode=='catalogue'" class="btn btn-primary">{{msgValidationPrestation}}</a>
+			        <a (click)="addPanier(prestation);"  *ngIf="mode=='catalogue'" class="btn btn-primary">{{msgValidationPrestation}}</a>
 		        </div>
 		    </div>
 		</div>
@@ -61,6 +48,5 @@
 		</div>
 	</div>
 </div>
-        <a routerLink="/rdv" *ngIf="!isPanierEmpty" class="btn btn-primary validatorBtn">Valider le panier</a>
 </div>
 <!--/.Card-->

@@ -66,5 +66,6 @@ export class EventsService  {
   }
   reset(){
     this.panier = {"prestation":[]};
+     this.prestationLoaded.emit(true);
   }
 }
