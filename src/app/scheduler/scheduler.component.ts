@@ -67,7 +67,7 @@ import { Subject } from 'rxjs/Subject';
 })
 export class SchedulerComponent implements OnInit {
   view = 'month';
-  
+  clicked: boolean =false;
   refresh: Subject<any> = new Subject();
   @Input() toggleCalendar: string;
   viewDate: Date = new Date();
@@ -184,20 +184,23 @@ export class SchedulerComponent implements OnInit {
       var yesterday = new Date();
 
     yesterday.setDate(new Date().getDate() - 1);
-    if( this.view == 'day'){
+    if( this.view == 'day' && !this.clicked){
+       this.clicked=true;
       let e: ICalendarEvent<any> = {
       title : this.eventsService.selectedPrestation.titre,
       color : this.colors.blueAko,
       start :  event.date,
       startTime :  event.date.getTime(),
-      end : addHours(event.date, 1),
-      endTime : addHours(event.date, 1).getTime()
+      end : addHours(event.date, this.eventsService.selectedPrestation.duree),
+      endTime : addHours(event.date, this.eventsService.selectedPrestation.duree).getTime()
       }
       this.eventsFromFb = this.validateEvent(e);
             // subscribe to changes
       this.filteredEvents = _.filter(this.eventsService.events, function(o) {
-        let flag = o.startTime<=e.startTime && o.endTime>e.startTime ;
-         return  flag;
+        let flag1 = (o.startTime<=e.startTime && o.endTime>e.startTime) ;
+        let flag2 = (o.startTime>=e.startTime && o.startTime<e.endTime ) ;
+        
+         return  flag1 || flag2;
       });
       if (this.filteredEvents.length == 0) {
         this.viewDate = event.date;
@@ -205,7 +208,9 @@ export class SchedulerComponent implements OnInit {
         this.eventsService.events.push(e);
         this.events=[...this.eventsService.events];
         this.refresh.next();
-        setTimeout(()=>{    //<<<---    using ()=> syntax
+        setTimeout(()=>{   
+          this.clicked=false;
+          //<<<---    using ()=> syntax
          this.eventsService.addPrestationToPanier();
        },1500);
         //this.router.navigate(['/rdv']);
@@ -213,7 +218,8 @@ export class SchedulerComponent implements OnInit {
         
         
       }else{
-        this.eventsService.errorMsg.emit("Ce créneau est déja réservé. Veuillez en sélectionner un autre.")
+        this.clicked=false;
+        this.eventsService.errorMsg.emit("Ce créneau est déja réservé ou déborde sur un autre rendez vous. Veuillez en sélectionner un autre.")
       }
        
      

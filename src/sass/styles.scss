@@ -109,32 +109,41 @@ a:not([href]).btn-primary{
 }
 #calendar-content{
     overflow-x: hidden;
+    border-radius: 15px;
 }
 .img-fluid{
 	margin-top:5px;
 	border-radius:150px; 
-	 opacity: 0.5;
+	 opacity: 1;
 }
 
 
 
 .card:hover .img-fluid {
-  transition: 2s ease;
+  transition: 1s ease;
   opacity: 1;
-  border-radius:15px; 
+  /*border-radius:15px; */
 }
 
 .card{
-	transition: 2s ease;
+	transition: 1s ease;
 	margin:5px;
 	border-radius: 336px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  	
+	/*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+  	border: 0px solid ;
 }
 
-
+@media only screen and (max-width: 500px) {
+		.card{
+			transition: 1s ease;
+			margin:5px;
+			border-radius: 336px;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		  	border: 0px solid ;
+		}
+	}
 .card:hover {
-	transition: 2s ease;
+	transition: 1s ease;
 	margin:5px;
 	border-radius: 15px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -154,7 +163,7 @@ a:not([href]).btn-primary{
 
 .square{
 	border-radius: 15px;
-  	
+  	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .odd-cell {
       background-color: $ako-base-color !important;

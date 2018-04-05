@@ -3,7 +3,7 @@
 <!--Card-->
 	 
 	
-	<div  *ngFor="let prestation of prestations"  [ngClass]="{'square': fixedSquared, 'card':true, 'col-md-5':true, 'draggable':true  }" (click)="showPrestation(prestation)" >
+	<div  *ngFor="let prestation of prestations"  [ngClass]="{'square': fixedSquared!=='false', 'card':true, 'col-md-5':true, 'draggable':true  }" (click)="showPrestation(prestation)" >
 		<div #card *ngIf="selectedId!=prestation.idPrestation"  >
 		   
 		    <!--Card content-->
