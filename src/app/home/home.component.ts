@@ -1,4 +1,5 @@
 import { EventsService } from '../services/events.service';
+import { Prestation } from '../utils/panier';
 import { Component, OnInit, Input } from '@angular/core';
 import {
   trigger,
@@ -39,14 +40,23 @@ export class HomeComponent implements OnInit {
   constructor(private router:Router,  private db: AngularFireDatabase,private eventsService: EventsService) { }
 
   ngOnInit() {
-   
+    let $this = this;
+     this.db.list('/prestations').valueChanges().subscribe((prestations:Prestation[]) =>{
+      console.log("import Prestations");
+      $this.eventsService.prestations = [];
+        prestations.forEach(function (value : Prestation) {
+          console.log("waiting for loading... index: " + value);
+          $this.eventsService.prestations.push(value);
+        });
+        this.toggleLoader = 'hide';
+    });
     this.toggleLogo = 'hide';
      this.toggleLoader = 'show';
      this.eventsService.events$.subscribe(()=>{
         while(this.eventsService.loadsIndex==0){
           console.log("waiting for loading... index: "+ this.eventsService.loadsIndex);
         }
-        this.toggleLoader = 'hide';
+       
      });
     /*setTimeout(()=>{    //<<<---    using ()=> syntax
        
